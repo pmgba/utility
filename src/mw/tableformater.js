@@ -1,4 +1,4 @@
-pw.widgets.columnformater = function(){
+(function(){
 	$('.js-columnformater').each(function(){
 		var $table = $(this).next('table');
 	  var colClass = $table.data('columnformater');
@@ -20,4 +20,4 @@ pw.widgets.columnformater = function(){
 		});
 		
 	});
-};
+})();

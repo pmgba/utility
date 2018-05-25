@@ -43,17 +43,17 @@ pw.loader = {
       
       for ( var j in urlList ) {
       	//var url = pw.loader._temporarySolution[ urlList[j].toLowerCase() ] || urlList[j];
-      	var url = urlList[j].toLowerCase();
+      	var url = urlList[j];
       	
         if ( false ) {
         } else if ( url.match(/^MediaWiki:.+\.js$/i) ) {
           //url = '/w/index.php?action=raw&ctype=text/javascript&maxage=2419200&smaxage=2419200&title=' + url;
-          url = pw.config.get('pwScriptPath') + url.slice(10);
+          url = pw.config.get('pwScriptPath') + url.slice(10).toLowerCase();
         } else if ( url.match(/^MediaWiki:.+\.css$/i) ) {
           //url = '/w/index.php?action=raw&ctype=text/css&maxage=2419200&smaxage=2419200&title=' + url;
         } else if ( url.match(/^(http:\/\/|https:\/\/|\/\/)/i) ) {
         } else {
-          url = pw.config.get('pwScriptPath') + url;
+          url = pw.config.get('pwScriptPath') + url.toLowerCase();
         }
         if ( ! ( url in pw.loader._scriptList ) ) {
         	pw.loader._scriptList[ url ] = false;

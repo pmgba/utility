@@ -1,4 +1,5 @@
-pw.loader.using( [ 'pokemon.js'], function(){
+(function(){
+	pw.loader.using( [ 'pokemon.js'], function(){
 	var html = '';
 	html += '<select>';
 	for(var pi=1;pi<=pw.info.maxPokemonCount;pi++) {
@@ -15,3 +16,4 @@ pw.loader.using( [ 'pokemon.js'], function(){
 	});
 	$container.append($pdd);
 });
+})();

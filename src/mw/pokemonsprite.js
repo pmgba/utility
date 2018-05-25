@@ -26,7 +26,7 @@ pw.sprite = {
 			var pid = $this.data('pid');
 			var val = $this.data('val');
 			var width = $this.data('width');
-			$this.html( pw.sprite.create( ver, pid || val, width ) );
+			$this.html( pw.sprite.create( ver, pid || val , width ) );
 		});
 	},
 	
@@ -37,7 +37,7 @@ pw.sprite = {
 			s: width,
 		};
 		if ( ver === 'pi' ) {
-			var pid = val;
+			var pid = String(val);
 			var num = parseInt(pid.slice(0,3),10);
 			var fi  = parseInt(pid.slice(-2),10);
 			var fil = ( fi == 0 ) ? -1 : pw.sprite.fullFormIDList.indexOf(pid);

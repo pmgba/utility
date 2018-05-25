@@ -1,4 +1,4 @@
-﻿pw.widgets.collapsiblelist = function(){
+﻿(function(){
 	$('.js-collapsiblelist').each( function () {
 	
 		var $toggle= $(this);
@@ -24,4 +24,4 @@
 		});
 	
 	});
-};
+})();

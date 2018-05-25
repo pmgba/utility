@@ -1,4 +1,4 @@
-pw.widgets.tabsections = function(){
+(function(){
 	pw.loader.using( ['jqueryui'], function () {
 		$('.js-tabsections').each( function ( index ) {
 			var $tab = $(this);
@@ -25,4 +25,4 @@ pw.widgets.tabsections = function(){
 			$tab.tabs();
 		});
 	});
-};
+})();
