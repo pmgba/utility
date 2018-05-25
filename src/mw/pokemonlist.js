@@ -11,8 +11,8 @@ pw.loader.using( [ 'pokemon.js', 'pokemon.7.js', 'pokemonsprite.js' ], function(
 		tr += '<td>#'+num[0]+'</td>';
 		tr += '<td><a href="'+mw.util.getUrl(name.name)+'">'+name.fullname+'</a></td>';
  
-		var type = pw.util.createColorlabel( 'span', 'type', pw.database.types.names['zh-cn'][data.types[0]], null, 'cl-fw' );
-		if ( data.types[0] != data.types[1] ) type += pw.util.createColorlabel( 'span', 'type', pw.database.types.names['zh-cn'][data.types[1]], null, 'cl-fw' );
+		var type = pw.util.createColorlabel( 'span', 'type', pw.database.types.names['zh-cn'][data.types[0]] );
+		if ( data.types[0] != data.types[1] ) type += pw.util.createColorlabel( 'span', 'type', pw.database.types.names['zh-cn'][data.types[1]] );
 		tr += '<td>'+type+'</td>';
 		
 		var a1 = pw.database.abilities.names["zh-cn"][data.abilities[0]];
@@ -30,13 +30,13 @@ pw.loader.using( [ 'pokemon.js', 'pokemon.7.js', 'pokemonsprite.js' ], function(
 			tr += '<td></td>';
 		}
  
-		tr += '<td class="ct c-stat-hp">'+data.basestats[0]+'</td>';
-		tr += '<td class="ct c-stat-at">'+data.basestats[1]+'</td>';
-		tr += '<td class="ct c-stat-df">'+data.basestats[2]+'</td>';
-		tr += '<td class="ct c-stat-sa">'+data.basestats[4]+'</td>';
-		tr += '<td class="ct c-stat-sd">'+data.basestats[5]+'</td>';
-		tr += '<td class="ct c-stat-sp">'+data.basestats[3]+'</td>';
-		tr += '<td class="ct c-stat-sum">'+eval(data.basestats.join("+"))+'</td>';
+		tr += '<td><span class="ct c-stat-hp">'+data.basestats[0]+'</span></td>';
+		tr += '<td><span class="ct c-stat-at">'+data.basestats[1]+'</span></td>';
+		tr += '<td><span class="ct c-stat-df">'+data.basestats[2]+'</span></td>';
+		tr += '<td><span class="ct c-stat-sa">'+data.basestats[4]+'</span></td>';
+		tr += '<td><span class="ct c-stat-sd">'+data.basestats[5]+'</span></td>';
+		tr += '<td><span class="ct c-stat-sp">'+data.basestats[3]+'</span></td>';
+		tr += '<td><span class="ct c-stat-sum">'+eval(data.basestats.join("+"))+'</span></td>';
 		tr += '</tr>';
 		return tr;
 	};
@@ -84,7 +84,6 @@ pw.loader.using( [ 'pokemon.js', 'pokemon.7.js', 'pokemonsprite.js' ], function(
 	});
 
 	mw.loader.using( 'jquery.tablesorter', function() {
-		$('.pokemonlist').tablesorter( {sortList: [ { 1: 'asc'} ]} );
+		$('.pokemonlist table').tablesorter( {sortList: [ { 1: 'asc'} ]} );
 	} );
-  pw.sprite.generate();
 });

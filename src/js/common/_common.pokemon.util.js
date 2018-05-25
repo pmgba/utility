@@ -1,4 +1,4 @@
-$.extend( true, pokeWiki, {
+$.extend( true, pw, {
 	util: {
     getResUrl : function( url ) {
       var respath = pokeWiki.config.get('pwResPath').replace(/\/+$/,'');

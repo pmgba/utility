@@ -1,12 +1,4 @@
-(function(){
-	/*
-	mw.loader.using('jqueryui',function(){
-		$('#pokemonforms li').each(function(i,v){
-			$(this).html('<a href="#pokemonform-'+(i+1)+'">'+$(this).html()+'</a>');
-		});
-		$( "#pokemonforms" ).tabs();
-	});
-	*/
+if ( mw.config.get('wgCategories').indexOf('宝可梦') > -1 ) {
 	$('.pp-tab-content:not(:first)').hide();
 	$('.pp-tab-toggle:first').addClass('is-active');
 	$('.pp-tab-toggle').each( function( index ){
@@ -26,4 +18,4 @@
 +'.pp-tab-toggle.is-active { color: black; font-weight: bold; }'
 );
 
-})();
+}

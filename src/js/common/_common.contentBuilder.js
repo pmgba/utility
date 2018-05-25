@@ -4,7 +4,7 @@ $.extend( true, pw, {
 			text  = text  || value;
 			style = style || '';
 			classname = classname || '';
-			var html = '<' + tag + ' class="cc cl c-' + group + '-' + value + ' ' + classname + '" style="' + style + '">' + text + '</' + tag + '>';
+			var html = '<' + tag + ' class="cc cl c-' + group + '-' + value + ' cl-badge ' + classname + '" style="' + style + '">' + text + '</' + tag + '>';
 			return html;
 		},
 		createArticleTable : function ( tbody ) {

@@ -48,6 +48,8 @@
   	pw.loader.using( 'edit.js' );
   } else if ( mw.config.get( 'wgCanonicalSpecialPageName' ) === 'Recentchanges' && !mw.user.options.get('usenewrc') ) {
   	pw.loader.using( 'specialpage.recentchanges.js' );
+  } else if ( mw.config.get('wgIsMainPage') || mw.config.get('wgPageName') ==='口袋百科:首页') {
+		pw.whoami.init();
   }
 	/********************/
   	/*

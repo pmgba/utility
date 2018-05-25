@@ -12,8 +12,22 @@
 	white-space: nowrap;
 }
 
+%plainlinks {
+	a,
+	a:link,
+	a:visited,
+	a:hover,
+	a:active {
+		color: inherit;
+		background: none !important;
+		padding: 0 !important;
+	}
+}
+
+
+
 .text-left,
-table.text-left   td {
+table.text-left td {
 		@extend %text-left;
 }
 .text-right,

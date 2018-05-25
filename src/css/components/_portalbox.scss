@@ -36,7 +36,7 @@
 	}
 	
 	&-border {
-		border-color: var(--border);
+		border-color: var(--border) !important;
 	}
 	&-red {
 		--bg: #fff7fb;
@@ -55,8 +55,7 @@
 	}
 	&-yellow {
 		--bg: #fffbf7;
-		--border: #ffc891
+		--border: #ffc891;
 		--shade: #ffeedd;
 	}
-	
 }

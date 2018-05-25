@@ -5,10 +5,8 @@
 		".colortable-width-half": "ablock-half",
 		".colortable-width-full, .colortable-width-half": "articletable",
 		".colortable-hover ": "articletable-hover",
-		".colortable-wrapper ": "colortable-allround",
 		".colortable-nester, .colortable-nested ": "colortable-container",
 		".colortable-container > .colortable ": "colortable-child",
-		
 	}, function(k,v){
 		$(k).addClass(v);
 	});
@@ -24,10 +22,10 @@
 		var span = $this.attr('rowspan');
 		var curRow = $this.parent().index();
 		var maxRow = $this.parent().parent().children().length;
-		if ( curRow + parseInt(span,10) >= maxRow ) $this.addClass('border-bottom');
+		if ( curRow + parseInt(span,10) >= maxRow ) $this.addClass('b-b');
 	});
 	
-	$('.colortable--child').parent().addClass('colortable__child-container');
+	$('.colortable-child').parent().addClass('colortable-container');
 	
 	mw.loader.load('http://hm.baidu.com/h.js?5d5b68f5aaae57bdebbe134a5acde926');
 	
