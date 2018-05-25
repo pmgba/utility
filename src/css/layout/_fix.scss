@@ -1,0 +1,23 @@
+html body {
+	background-color: #f6f6f6;
+}
+
+html {
+    box-sizing: content-box !important;
+}
+
+html * {
+    box-sizing: inherit;
+}
+
+html .mw-body {
+    box-sizing: border-box;
+}
+
+html a {
+    color: #0645ad;
+}
+
+html a:hover {
+    color: #0b0080;
+}

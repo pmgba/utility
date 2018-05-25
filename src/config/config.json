@@ -1,0 +1,7 @@
+{
+  "version" : "0.1.0",
+  
+  "pwScriptPath" : "http://static.pokemon.name/utility/dist/mw/",
+  "pwResPath" : "http://res.pokemon.name/",
+  "pwLanguage" : "zh-cn"
+}

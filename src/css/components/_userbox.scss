@@ -1,0 +1,26 @@
+.userbox {
+	width: 320px;
+	margin: 0 0 3px 3px;
+	text-align:center;
+	
+	&-id {
+		@extend .colorbox-image;
+		background-color: var(--light, $background-color) !important;
+		color: #fff;
+	}
+	
+	&-info {
+		text-align:left;
+		padding: 0 3px;
+	}
+	
+	&-right {
+		@extend .colorbox-image;
+		color: #666;
+		
+		&:empty {
+			display: none;
+		}
+	}
+	
+}

@@ -1,0 +1,62 @@
+.client-nojs .u-nojs {
+	display: none;
+}
+
+.image {
+
+	&-silhouette,
+	&-black {
+    filter: brightness(0);
+	}
+	
+	&-white {
+	    filter: brightness(0) invert(100%);
+	}
+	
+	&-gray {
+		filter: grayscale(100%);
+	}
+	
+}
+
+.border {
+	&-left {
+		border-left-width: 1px !important;
+	}
+	&-bottom {
+		border-bottom-width: 1px !important;
+	}
+}
+
+.b {
+	&-t {
+		border-top-width: 1px !important;
+	}
+	&-b {
+		border-bottom-width: 1px !important;
+	}
+	&-l {
+		border-left-width: 1px !important;
+	}
+	&-r {
+		border-right-width: 1px !important;
+	}
+	&-nt {
+		border-top-width: 0 !important;
+	}
+	&-nb {
+		border-bottom-width: 0 !important;
+	}
+	&-nl {
+		border-left-width: 0 !important;
+	}
+	&-nr {
+		border-right-width: 0 !important;
+	}
+}
+
+.bg {
+	&-white {
+		background-color: #fff !important;
+	}
+}

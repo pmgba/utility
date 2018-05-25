@@ -1,0 +1,39 @@
+
+%text-left {
+	text-align: left;
+}
+%text-right {
+	text-align: right;
+}
+%text-center {
+	text-align: center;
+}
+%nowarp {
+	white-space: nowrap;
+}
+
+.text-left,
+table.text-left   td {
+		@extend %text-left;
+}
+.text-right,
+table.text-right  td {
+		@extend %text-right;
+}
+.text-center,
+table.text-center td {
+		@extend %text-center;
+}
+
+@for $i from 1 through 12 {
+
+	.nowarp#{$i} td:nth-child(#{$i}) {
+		@extend %nowarp;
+	}
+	.text-left#{$i} td:nth-child(#{$i}) {
+		@extend %text-left;
+	}
+	.text-right#{$i} td:nth-child(#{$i}) {
+		@extend %text-right;
+	}
+}

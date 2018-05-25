@@ -1,0 +1,42 @@
+body .cc,
+.colorize .cc {
+	border-color: #aaa;
+	border-color: var(--dark, #aaa);
+	background-color: var(--light, #ddd);
+	
+	&-white {
+		background-color: #fff;
+	}
+}
+
+.colorcell, .cc {
+
+	a,
+	a:link,
+	a:visited,
+	a:hover,
+	a:active {
+		color: inherit;
+	}
+	
+	> td {
+		// for tr.colorcell
+		background-color: transparent;
+	}
+	
+	&-t {
+		&-1 { background-image: var(--tint-1); }
+		&-2 { background-image: var(--tint-2); }
+		&-3 { background-image: var(--tint-3); }
+		&-4 { background-image: var(--tint-4); }
+		&-5 { background-image: var(--tint-5); }
+	}
+	&-s {
+		&-1 { background-image: var(--shade-1); }
+		&-2 { background-image: var(--shade-2); }
+		&-3 { background-image: var(--shade-3); }
+		&-4 { background-image: var(--shade-4); }
+		&-5 { background-image: var(--shade-5); }
+	}
+	
+}

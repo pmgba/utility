@@ -1,0 +1,14 @@
+@media screen and (max-width: #{$desktop-breakpoint - 1}px) {
+
+	#content,#footer,.pw-comment { margin-left: 0 !important; }
+	
+	#mw-panel .portal {
+		display:none;
+	}
+
+	#p-logo, #p-logo a {
+		height:80px !important;
+		background-size: 60px;
+	}
+
+}

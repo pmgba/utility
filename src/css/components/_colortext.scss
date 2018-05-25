@@ -1,0 +1,11 @@
+.colortext,.ct {
+	color: var(--dark, #000);
+	font-weight: bold;
+	a,
+	a:link,
+	a:visited,
+	a:hover,
+	a:active {
+		color: inherit;
+	}
+}

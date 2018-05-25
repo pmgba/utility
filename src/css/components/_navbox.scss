@@ -1,0 +1,58 @@
+$name : navbox;
+
+.#{$name} {
+	@extend %unified;
+	
+	clear: both;
+	font-size: smaller;
+	margin: 4px auto;
+	width: 100%;
+	border-spacing: 4px;
+	text-align: center;
+	
+	&-title {
+		font-size: larger;
+		padding: 0.2em;
+		font-weight: bold;
+	}
+	
+	&-header {
+		font-weight: bold;
+		background-image: var(--tint-1);
+	}
+	
+	&-group {
+		padding: 0 0.3em;
+		width: 8em;
+		font-weight: bold;
+		text-align: center;
+		background-image: var(--tint-2);
+	}
+	
+	.colortable-child &-group {
+		background-image: var(--tint-3);
+	}
+	
+	.colortable-child .colortable-child &-group {
+		background-image: var(--tint-4);
+	}
+	
+	&-abovebelow {
+		text-align: center;
+		font-weight: bold;
+	}
+	
+	&-list {
+		background-color: #fff;
+		text-align: left;
+		padding-left: 3px;
+	}	
+
+	&.colorize{
+		.#{$name}-header,
+		.#{$name}-group,
+		.#{$name}-bar {
+			background-color: var(--light, $background-color);
+		}
+	}
+}

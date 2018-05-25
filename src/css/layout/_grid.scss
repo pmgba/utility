@@ -1,0 +1,35 @@
+$grid-columns: 12;
+$grid-gutter: 1rem;
+$grid-margin: 2rem;
+$grid-breakpoints: 
+    'md' '( min-width: #{$tablet-breakpoint}px  )',
+    'lg' '( min-width: #{$desktop-breakpoint}px )',
+;
+
+@mixin make-column($name){
+    @for $i from 1 through $grid-columns {
+        .col#{$name}-#{$i} {
+            width: percentage($i/$grid-columns);
+        }
+        .col#{$name}-offset-#{$i} {
+            margin-left: percentage($i/$grid-columns);
+        }
+    }
+}
+
+.row {
+  display: -ms-flexbox;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+@include make-column('');
+
+@each $breakpoint in $grid-breakpoints {
+    $name: nth($breakpoint, 1);
+    $declaration: nth($breakpoint, 2);
+
+    @media only screen and #{$declaration} {
+        @include make-column('-' + $name);
+    }
+}

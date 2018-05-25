@@ -1,0 +1,76 @@
+.mbox {
+	text-align: center;
+	margin: auto;
+	width: 100%;
+	clear: both;
+	
+	&-image {
+		@extend .colorbox-image;
+		width:  60px;
+	}
+	
+	&-text {
+		text-align: left;
+	}
+	
+	 &-bar {
+		width: 10px;
+	}
+	
+	& + & { margin-top: -1px; }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	&-article {
+		width: 85%;
+		
+		& .mbox-bar:first-child {
+				background-color: var(--dark,$border-color) !important;
+		}
+	}
+	&-system {
+	}
+	&-notice {
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+}
+
+
+/* small */
+
+.mbox.mbox-small-left, .mbox.mbox-small-right {
+	clear: none;
+	width: 240px;
+}
+
+.mbox.mbox-small-left .mbox-image,
+.mbox.mbox-small-right .mbox-image {
+	width: auto;
+	height: auto;
+}
+
+.mbox.mbox-small-left .mbox-text,
+.mbox.mbox-small-right .mbox-text {
+	font-size: 90%;
+}
+
+.mbox-small-left {
+	float: left;
+}
+
+.mbox-small-right {
+	float: right;
+}

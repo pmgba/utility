@@ -1,0 +1,19 @@
+.articletable {
+	margin-top: 1em;
+	margin-bottom: 1em;
+	text-align: center;
+	
+	> tbody > tr > td,
+	.colortable-child > tbody > tr > td {
+		padding-left: 3px;
+		padding-right: 3px;
+	}
+	
+	&-hover > tbody > tr:hover > td:not(.cc) {
+			background-color:rgba(255,255,255,0.5) !important;
+	}
+
+	& th {
+		//white-space:nowrap;
+	}
+}

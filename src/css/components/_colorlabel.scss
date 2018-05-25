@@ -1,0 +1,74 @@
+.cl {
+	color: white;
+	color: var(--color, #fff);
+	text-align: center;
+	border: 1px solid transparent;
+	text-indent: 0;
+	&-badge {
+		display:inline-block;
+		line-height:100%;
+		min-width:50px;
+		font-size: 95%;
+	}
+	&-disabled {
+		background: #fff;
+		border: 1px dashed #aaa;
+	}
+	&-empty {
+		color: inherit;
+		background-color: #fff;
+		border: 1px dashed #aaa;
+	}
+	&-type {
+		box-shadow: inset 0 0 0 1px #fff;
+	}
+	&-mc {
+		border-radius: 0;
+	}
+}
+
+div.cl {
+}
+
+span.cl {
+	border-radius: 16px;
+  line-height: 100%;
+	margin: 0.1em;
+	padding: 0.1em;
+}
+
+i.cl { font-style:normal; padding: 0.1em; margin: 0.1em; border-radius: 16px; }
+mark.cl { padding: 0.1em; margin: 0.1em; }
+
+
+.colorlabels-merge {
+	.cl {
+		border-radius: 0;
+		&:first-child {
+			border-top-left-radius: 16px;
+			border-bottom-left-radius: 16px;
+		}
+		&:last-child {
+			border-top-right-radius: 16px;
+			border-bottom-right-radius: 16px;
+		}
+	}
+}
+
+.colorlabels-square {
+	.cl {
+		border-radius: 0;
+	}
+}
+
+.colorlabels-type {
+	.cl {
+		@extend .cl-type;
+	}
+}
+
+.colorlabels-mc {
+	.cl {
+		@extend .cl-mc;
+	}
+}

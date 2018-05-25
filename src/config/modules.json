@@ -1,0 +1,30 @@
+{
+  "bootstrap" : [
+    "//cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css",
+    "//cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"
+  ],
+  "jqueryui" : [
+    "//cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.css",
+    "//cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"
+  ],
+  "webui-popover" : [
+    "//cdn.bootcss.com/webui-popover/1.2.18/jquery.webui-popover.min.css",
+    "//cdn.bootcss.com/webui-popover/1.2.18/jquery.webui-popover.min.js"
+  ],
+  "katex" : [
+    "//cdn.bootcss.com/KaTeX/0.8.3/katex.min.css",
+    "//cdn.bootcss.com/KaTeX/0.8.3/katex.min.js"
+  ],
+  "chart" : [
+    "//cdn.bootcss.com/Chart.js/2.7.0/Chart.min.js"
+  ],
+  "flag" : [
+    "//cdn.bootcss.com/flag-icon-css/2.8.0/css/flag-icon.min.css"
+  ],
+  "font-awesome" : [
+    "//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"
+  ],
+  "ionicons" : [
+    "//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css"
+  ]
+}

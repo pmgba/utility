@@ -1,0 +1,275 @@
+
+/**********
+ * common *
+ **********/
+
+.colortable {
+	border: 1px solid #aaa;
+	border-radius: 0.5em;
+	margin: 1em 0;
+
+	background-color: #ddd;
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA8CAQAAAAN+BhxAAAAL0lEQVQIW2P478vE8J+JgQFM4kL/YCQDmIRzkRWgiePioomgCcLZEIvgInAEcicA8Bw4d8Idhx0AAAAASUVORK5CYII=');
+	background-repeat: repeat-x;
+	border-collapse: separate;
+	border-spacing: 2px;
+} 
+
+.colortable > tbody,
+.colortable > tbody > tr,
+.colortable > tbody > tr > * { border-color: inherit; }
+
+.colortable > tbody > tr > * {
+	border-width: 1px;
+	border-style: solid;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+ 
+.colortable > tbody > tr > th {
+	border-color: transparent;
+}
+
+.colortable td {
+	border-color: #ccc;
+	background-color: #fff;
+}
+
+.colortable th {
+	text-align: center;
+}
+ 
+.colortable > tbody > tr:first-child > :first-child { border-top-left-radius: 0.35em; }
+.colortable > tbody > tr:first-child > :last-child  { border-top-right-radius: 0.35em; }
+.colortable > tbody > tr:last-child  > :first-child { border-bottom-left-radius: 0.35em; }
+.colortable > tbody > tr:last-child  > :last-child  { border-bottom-right-radius: 0.35em; }
+
+.colorize .color-shade {
+	background-color: #ddd;
+	//background-image:  url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEVmZmZ8VoIEAAAAAXRSTlMNPlek2wAAAApJREFUeF5jYAAAAAIAAd6ej78AAAAASUVORK5CYII=');
+}
+.colorize .color-tint {
+	background-color: #ddd;
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEX///+nxBvIAAAAAXRSTlMavYQhHAAAAApJREFUeF5jYAAAAAIAAd6ej78AAAAASUVORK5CYII=');
+}
+
+tr.color-shade>td, tr.color-tint>td {background-color:transparent;}
+
+.colortable-hover > tbody > tr:hover > td:not(.colorlabel) {
+  background-color:rgba(255,255,255,0.5) !important;
+}
+
+.colortable-wrapper > tbody > tr > td {
+	border-radius: 0.35em;
+}
+
+
+
+
+
+/**********
+ * scheme *
+ **********/
+
+.colorize {
+	background-color: var(--background-color, #ddd);
+	border-color: var(--border-color, #aaa);
+}
+.colorize .color-shade, .colorize .color-tint, .colorize .colorlabel { background-color: var(--background-color, #ddd); }
+.colorize > tbody > tr > * { border-color: var(--border-color, #aaa); }
+
+hr.colorize { background-color: var(--background-color, #aaa); }
+
+.colortable td hr.colorize { opacity: 0.5; }
+
+/* .color */
+
+.color-transparent { background-color: #transparent ; }
+.color-white { background-color: #white ; }
+.color-border { border-width: 1px !important; border-style: solid !important; }
+
+/* .scheme */
+.colorize-pokemoncolor-red { --background-color: #f85020; --border-color: #D03000; }
+.colorize-pokemoncolor-blue { --background-color: #68b0e0; --border-color: #4890C0; }
+.colorize-pokemoncolor-yellow { --background-color: #f8e800; --border-color: #E8B800; }
+.colorize-pokemoncolor-green { --background-color: #98d048; --border-color: #70A830; }
+.colorize-pokemoncolor-black { --background-color: #585050; --border-color: #403838; }
+.colorize-pokemoncolor-brown { --background-color: #b89850; --border-color: #907030; }
+.colorize-pokemoncolor-purple { --background-color: #e098d0; --border-color: #B860B8; }
+.colorize-pokemoncolor-gray { --background-color: #b8b0b0; --border-color: #807878; }
+.colorize-pokemoncolor-white { --background-color: #e0e0e0; --border-color: #C0C0C0; }
+.colorize-pokemoncolor-pink { --background-color: #f8a8a8; --border-color: #F07070; }
+
+.colorize-type-normal, .colorize-type-一般 { --background-color: #dedecf; --border-color: #817d79; }
+.colorize-type-fighting, .colorize-type-格斗 { --background-color: #de6b56; --border-color: #813d2d; }
+.colorize-type-flying, .colorize-type-飞行 { --background-color: #7ebbff; --border-color: #547a92; }
+.colorize-type-poison, .colorize-type-毒 { --background-color: #d06abb; --border-color: #6c3f84; }
+.colorize-type-ground, .colorize-type-地面 { --background-color: #f4dc69; --border-color: #866e34; }
+.colorize-type-rock, .colorize-type-岩石 { --background-color: #dccd7e; --border-color: #846c48; }
+.colorize-type-bug, .colorize-type-虫 { --background-color: #ccdc2c; --border-color: #938215; }
+.colorize-type-ghost, .colorize-type-幽灵 { --background-color: #7f7fdb; --border-color: #554883; }
+.colorize-type-steel, .colorize-type-钢 { --background-color: #cdcddb; --border-color: #69717a; }
+.colorize-type-fire, .colorize-type-火 { --background-color: #ff552d; --border-color: #8c190c; }
+.colorize-type-water, .colorize-type-水 { --background-color: #3fbbff; --border-color: #1d5f95; }
+.colorize-type-grass, .colorize-type-草 { --background-color: #94ec6c; --border-color: #4b841c; }
+.colorize-type-electric, .colorize-type-电 { --background-color: #ffeb3f; --border-color: #938215; }
+.colorize-type-psychic, .colorize-type-超能力 { --background-color: #ff6abb; --border-color: #953151; }
+.colorize-type-ice, .colorize-type-冰 { --background-color: #93f5ff; --border-color: #449095; }
+.colorize-type-dragon, .colorize-type-龙 { --background-color: #947efd; --border-color: #534784; }
+.colorize-type-dark, .colorize-type-恶 { --background-color: #936952; --border-color: #4e3d33; }
+.colorize-type-fairy, .colorize-type-妖精 { --background-color: #ffcfff; --border-color: #94657c; }
+
+.colorize-game-红 { --border-color: #d04830; --background-color: #f8c058; }
+.colorize-game-绿 { --border-color: #68a878; --background-color: #c0e090; }
+.colorize-game-蓝 { --border-color: #38c0e0; --background-color: #bddcf5; }
+.colorize-game-皮卡丘 { --border-color: #e0b848; --background-color: #f8f898; }
+.colorize-game-金 { --border-color: #c87818; --background-color: #f8a818; }
+.colorize-game-银 { --border-color: #6283a4; --background-color: #bdcdff; }
+.colorize-game-水晶 { --border-color: #4a83b4; --background-color: #5abdd5; }
+.colorize-game-红宝石 { --border-color: #a82838; --background-color: #f87880; }
+.colorize-game-蓝宝石 { --border-color: #3860b0; --background-color: #58a0f8; }
+.colorize-game-火红 { --border-color: #d06850; --background-color: #f89040; }
+.colorize-game-叶绿 { --border-color: #40a018; --background-color: #68c840; }
+.colorize-game-绿宝石 { --border-color: #488070; --background-color: #58b888; }
+.colorize-game-钻石 { --border-color: #1f5993; --background-color: #69a3e6; }
+.colorize-game-珍珠 { --border-color: #9b619b; --background-color: #eedeff; }
+.colorize-game-白金 { --border-color: #3a3a4a; --background-color: #c5ced6; }
+.colorize-game-心金 { --border-color: #734120; --background-color: #ffb410; }
+.colorize-game-魂银 { --border-color: #0062bd; --background-color: #bdcdff; }
+.colorize-game-黑 { --border-color: #101010; --background-color: #484848; }
+.colorize-game-白 { --border-color: #686890; --background-color: #e8e8f8; }
+.colorize-game-黑2 { --border-color: #101010; --background-color: #484848; }
+.colorize-game-白2 { --border-color: #686890; --background-color: #e8e8f8; }
+.colorize-game-X { --border-color: #434EA6; --background-color: #6A7EF4; }
+.colorize-game-Y { --border-color: #894149; --background-color: #FF4239; }
+.colorize-game-终极红宝石 { --border-color: #5d1230; --background-color: #e9202a; }
+.colorize-game-始源蓝宝石 { --border-color: #08142c; --background-color: #006bb1; }
+.colorize-game-太阳 { --border-color: #EE5324; --background-color: #FAE35B; }
+.colorize-game-月亮 { --border-color: #574188; --background-color: #35BCE8; }
+.colorize-game-究极之日 { --border-color: #630; --background-color: #FAE35B; }
+.colorize-game-究极之月 { --border-color: #036; --background-color: #35BCE8; }
+
+.colorize-generation-1 { --background-color: #dd3b76; --border-color: #c92e69; }
+.colorize-generation-2 { --background-color: #f2cb16; --border-color: #ad8f0d; }
+.colorize-generation-3 { --background-color: #0EC730; --border-color: #0B9122; }
+.colorize-generation-4 { --background-color: #008CD7; --border-color: #005C8C; }
+.colorize-generation-5 { --background-color: #EE8C81; --border-color: #e86354; }
+.colorize-generation-6 { --background-color: #8fa4ad; --border-color: #6f8a96; }
+.colorize-generation-7 { --background-color: #5AC8FA; --border-color: #10aff8; }
+
+.colorize-silhouette-white {
+    filter: brightness(0) invert(100%);
+}
+.colorlabel {
+	color: white;
+	text-align: center;
+	border: 1px solid transparent;
+	text-indent:0;
+}
+
+.colorlabel a,.colorlabel a:link, .colorlabel a:visited, .colorlabel a:hover, .colorlabel a:active {
+	color: inherit;
+}
+
+div.colorlabel {
+	margin: 0.1em;
+	padding: 0.1em;
+	line-height: 1em;
+}
+span.colorlabel { padding: 0 1em; margin: 0.1em; border-radius: 16px; }
+i.colorlabel { font-style:normal; padding: 0.1em; margin: 0.1em; border-radius: 16px; }
+mark.colorlabel { padding: 0.1em; margin: 0.1em; }
+
+.colorlabels-fixed .colorlabel,
+.colorlabel.colorlabel-fixed {
+	display:inline-block;
+	padding: 2px 0;
+	line-height:100%;
+}
+
+/* Games */
+.colorlabel.colorlabel-game-red, .colorlabel.colorlabel-game-红 { border-color: #d04830; background-color: #f8c058; color: #d04830; }
+.colorlabel.colorlabel-game-green, .colorlabel.colorlabel-game-绿 { border-color: #68a878; background-color: #c0e090; color: #68a878; }
+.colorlabel.colorlabel-game-blue, .colorlabel.colorlabel-game-蓝 { border-color: #38c0e0; background-color: #bddcf5; color: #38c0e0; }
+.colorlabel.colorlabel-game-yellow, .colorlabel.colorlabel-game-皮卡丘 { border-color: #e0b848; background-color: #f8f898; color: #e0b848; }
+.colorlabel.colorlabel-game-gold, .colorlabel.colorlabel-game-金 { border-color: #c87818; background-color: #f8a818; color: #904830; }
+.colorlabel.colorlabel-game-silver, .colorlabel.colorlabel-game-银 { border-color: #6283a4; background-color: #bdcdff; color: #101010; }
+.colorlabel.colorlabel-game-crystal, .colorlabel.colorlabel-game-水晶 { border-color: #4a83b4; background-color: #5abdd5; color: #294a7b; }
+.colorlabel.colorlabel-game-ruby, .colorlabel.colorlabel-game-红宝石 { border-color: #a82838; background-color: #f87880; color: #782028; }
+.colorlabel.colorlabel-game-sapphire, .colorlabel.colorlabel-game-蓝宝石 { border-color: #3860b0; background-color: #58a0f8; color: #303870; }
+.colorlabel.colorlabel-game-firered, .colorlabel.colorlabel-game-火红 { border-color: #d06850; background-color: #f89040; color: #a84000; }
+.colorlabel.colorlabel-game-leafgreen, .colorlabel.colorlabel-game-叶绿 { border-color: #40a018; background-color: #68c840; color: #206030; }
+.colorlabel.colorlabel-game-emerald, .colorlabel.colorlabel-game-绿宝石 { border-color: #488070; background-color: #58b888; color: #385038; }
+.colorlabel.colorlabel-game-xd, .colorlabel.colorlabel-game-XD { border-color: #d21e2a; background-color: #21181b; color: #d7eff9; }
+.colorlabel.colorlabel-game-diamond, .colorlabel.colorlabel-game-钻石 { border-color: #1f5993; background-color: #69a3e6; color: #1f4069; }
+.colorlabel.colorlabel-game-pearl, .colorlabel.colorlabel-game-珍珠 { border-color: #9b619b; background-color: #eedeff; color: #cd8ac4; }
+.colorlabel.colorlabel-game-platinum, .colorlabel.colorlabel-game-白金 { border-color: #3a3a4a; background-color: #c5ced6; color: #4a4a5a; }
+.colorlabel.colorlabel-game-heartgold, .colorlabel.colorlabel-game-心金 { border-color: #734120; background-color: #ffb410; color: #ac6220; }
+.colorlabel.colorlabel-game-soulsilver, .colorlabel.colorlabel-game-魂银 { border-color: #0062bd; background-color: #bdcdff; color: #6283a4; }
+.colorlabel.colorlabel-game-black, .colorlabel.colorlabel-game-黑 { border-color: #101010; background-color: #484848; color: #c8c8d8; }
+.colorlabel.colorlabel-game-white, .colorlabel.colorlabel-game-白 { border-color: #686890; background-color: #e8e8f8; color: #181818; }
+.colorlabel.colorlabel-game-black2, .colorlabel.colorlabel-game-黑2 { border-color: #101010; background-color: #484848; color: #20a0f0; }
+.colorlabel.colorlabel-game-white2, .colorlabel.colorlabel-game-白2 { border-color: #686890; background-color: #e8e8f8; color: #c03848; }
+.colorlabel.colorlabel-game-x, .colorlabel.colorlabel-game-X { border-color: #434EA6; background-color: #6A7EF4; color: #1B1F42; }
+.colorlabel.colorlabel-game-y, .colorlabel.colorlabel-game-Y { border-color: #894149; background-color: #FF4239; color: #391B1E; }
+.colorlabel.colorlabel-game-omegaruby, .colorlabel.colorlabel-game-终极红宝石 { border-color: #5d1230; background-color: #e9202a; color: #fef8bc; }
+.colorlabel.colorlabel-game-alphasapphire, .colorlabel.colorlabel-game-始源蓝宝石 { border-color: #08142c; background-color: #006bb1; color: #cfe9ea; }
+.colorlabel.colorlabel-game-sun, .colorlabel.colorlabel-game-太阳 { border-color: #EE5324; background-color: #FAE35B; color: #EE5324; }
+.colorlabel.colorlabel-game-moon, .colorlabel.colorlabel-game-月亮 { border-color: #574188; background-color: #35BCE8; color: #47357E; }
+.colorlabel.colorlabel-game-ultrasun, .colorlabel.colorlabel-game-究极之日 { border-color: #630; background-color: #FAE35B; color: #630; }
+.colorlabel.colorlabel-game-ultramoon, .colorlabel.colorlabel-game-究极之月 { border-color: #036; background-color: #35BCE8; color: #036; }
+
+
+/* Types */
+.colorlabel.colorlabel-type-normal, .colorlabel.colorlabel-type-一般 { border-color: #8A8A7B; background-color: #BBBBAA; }
+.colorlabel.colorlabel-type-fighting, .colorlabel.colorlabel-type-格斗 { border-color: #912E1E; background-color: #BB5544; }
+.colorlabel.colorlabel-type-flying, .colorlabel.colorlabel-type-飞行 { border-color: #3678FF; background-color: #6699FF; }
+.colorlabel.colorlabel-type-poison, .colorlabel.colorlabel-type-毒 { border-color: #792F6A; background-color: #AA5599; }
+.colorlabel.colorlabel-type-ground, .colorlabel.colorlabel-type-地面 { border-color: #B59226; background-color: #DDBB55; }
+.colorlabel.colorlabel-type-rock, .colorlabel.colorlabel-type-岩石 { border-color: #88762C; background-color: #BBAA66; }
+.colorlabel.colorlabel-type-bug, .colorlabel.colorlabel-type-虫 { border-color: #849400; background-color: #AABB22; }
+.colorlabel.colorlabel-type-ghost, .colorlabel.colorlabel-type-幽灵 { border-color: #42428E; background-color: #6666BB; }
+.colorlabel.colorlabel-type-steel, .colorlabel.colorlabel-type-钢 { border-color: #74747B; background-color: #AAAABB; }
+.colorlabel.colorlabel-type-fire, .colorlabel.colorlabel-type-火 { border-color: #BA1F00; background-color: #FF4422; }
+.colorlabel.colorlabel-type-water, .colorlabel.colorlabel-type-水 { border-color: #0D6AC8; background-color: #3399FF; }
+.colorlabel.colorlabel-type-grass, .colorlabel.colorlabel-type-草 { border-color: #40C60A; background-color: #77CC55; }
+.colorlabel.colorlabel-type-electric, .colorlabel.colorlabel-type-电 { border-color: #BD8E00; background-color: #FFCC33; }
+.colorlabel.colorlabel-type-psychic, .colorlabel.colorlabel-type-超能力 { border-color: #D00053; background-color: #FF5599; }
+.colorlabel.colorlabel-type-ice, .colorlabel.colorlabel-type-冰 { border-color: #13A8D9; background-color: #77DDFF; }
+.colorlabel.colorlabel-type-dragon, .colorlabel.colorlabel-type-龙 { border-color: #31229D; background-color: #7766EE; }
+.colorlabel.colorlabel-type-dark, .colorlabel.colorlabel-type-恶 { border-color: #442C21; background-color: #775544; }
+.colorlabel.colorlabel-type-fairy, .colorlabel.colorlabel-type-妖精 { border-color: #EC67EA; background-color: #FFAAFF; }
+
+
+/* Move category */
+.colorlabel.colorlabel-movecategory-physical,	.colorlabel.colorlabel-movecategory-物理 { border-color: #702008; background-color: #f05030; color: #f8c030; }
+.colorlabel.colorlabel-movecategory-special,	.colorlabel.colorlabel-movecategory-特殊 { border-color: #483850; background-color: #5070a8; color: #c0d8f8; }
+.colorlabel.colorlabel-movecategory-other,	.colorlabel.colorlabel-movecategory-变化 { border-color: #505050; background-color: #a8a090; color: #f8f8f8; }
+
+.colorlabel.colorlabel-fixed.colorlabel-type,
+.colorlabel.colorlabel-fixed.colorlabel-movecategory {
+	min-width:50px;
+	font-size: 90%;
+}
+
+/* Pokemon color */
+.colorlabel.colorlabel-pokemoncolor-red    { border-color: #D03000; background-color: #F85020; }
+.colorlabel.colorlabel-pokemoncolor-blue   { border-color: #4890C0; background-color: #68B0E0; }
+.colorlabel.colorlabel-pokemoncolor-yellow { border-color: #E8B800; background-color: #F8E800; }
+.colorlabel.colorlabel-pokemoncolor-green  { border-color: #70A830; background-color: #98D048; }
+.colorlabel.colorlabel-pokemoncolor-black  { border-color: #403838; background-color: #585050; }
+.colorlabel.colorlabel-pokemoncolor-brown  { border-color: #907030; background-color: #B89850; }
+.colorlabel.colorlabel-pokemoncolor-purple { border-color: #B860B8; background-color: #E098D0; }
+.colorlabel.colorlabel-pokemoncolor-gray   { border-color: #807878; background-color: #B8B0B0; }
+.colorlabel.colorlabel-pokemoncolor-white  { border-color: #C0C0C0; background-color: #E0E0E0; }
+.colorlabel.colorlabel-pokemoncolor-pink   { border-color: #F07070; background-color: #F8A8A8; }
+
+
+/* Generation */
+.colorlabel.colorlabel-generation-1 { border-color: #c92e69; background-color: #dd3b76; }
+.colorlabel.colorlabel-generation-2 { border-color: #ad8f0d; background-color: #f2cb16; }
+.colorlabel.colorlabel-generation-3 { border-color: #ad8f0d; background-color: #0EC730; }
+.colorlabel.colorlabel-generation-4 { border-color: #005C8C; background-color: #008CD7; }
+.colorlabel.colorlabel-generation-5 { border-color: #e86354; background-color: #EE8C81; }
+.colorlabel.colorlabel-generation-6 { border-color: #6f8a96; background-color: #8fa4ad; }
+.colorlabel.colorlabel-generation-7 { border-color: #10aff8; background-color: #5AC8FA; }

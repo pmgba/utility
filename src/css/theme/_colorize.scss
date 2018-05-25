@@ -1,0 +1,18 @@
+.colorize {
+	&-border {
+		&,
+		td {
+			border-color: var(--dark, #aaa);
+		}
+	}
+	
+	&-bg {
+		background-color: var(--light, #ddd);
+	}
+	
+}
+
+hr.colorize {
+	background-color: var(--background-color, #aaa);
+	opacity: 0.5;
+}

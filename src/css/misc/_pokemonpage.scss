@@ -1,0 +1,20 @@
+.pp {
+	&-te {
+		border: 1px solid var(--dark);
+		border-top-width: 0;
+		font-size: xx-small;
+		font-weight: bold;
+		color: blue;
+		//color:  var(--dark);
+		&-1 {
+			color: white;
+		}
+		&-2,
+		&-4 {
+    	color: red;
+		}
+		&-0 {
+			color: black;
+		}
+	}
+}

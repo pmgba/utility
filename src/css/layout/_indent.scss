@@ -1,0 +1,35 @@
+.text-indent,
+.text-indent > p,
+.mw-content-ltr > p {
+	text-indent:2em;
+}
+
+
+.ablock {
+
+	&-fill,
+	&-full,
+	&-half {
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	@media (min-width: #{$tablet-breakpoint}px) {
+		&-full,
+		&-half {
+			width: 95%;
+			width: calc(100% - 4em);
+			margin-left: 2em;
+			margin-right: 2em;
+		}
+	}
+	
+	@media (min-width: #{$desktop-breakpoint}px) {
+		&-half {
+			width: 47.5%;
+			width: calc(50% - 2em);
+		}
+	}
+	
+}

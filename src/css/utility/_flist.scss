@@ -1,0 +1,25 @@
+.flist{ 
+	ul {
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		list-style:none;
+		width: 100%;
+		li {
+		    margin: 0;
+		}
+	}
+	
+	&-large li {
+	    width: 200px;
+	}
+	&-medium li {
+	    width: 150px;
+	}
+	&-small li {
+	    width: 100px;
+	}
+	
+	
+}

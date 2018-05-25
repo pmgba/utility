@@ -1,0 +1,81 @@
+$name : infobox;
+
+.#{$name} {
+	@extend %unified;
+	
+	float: right;
+	border-radius: 0.3em;
+	padding: 0.1em;
+	text-align: center;
+	margin: 0 0 0.5em 0.5em;
+	width: 300px;
+	border-spacing: 4px;
+	
+	> tbody > tr > td {
+		border-radius: $border-radius;
+	}
+	
+	&-title {
+		font-size: 120%;
+		padding: 0.3em;
+		font-weight: bold;
+		background-image: var(--tint-1);
+		
+	}
+	
+	&-subtitle {
+		font-weight: normal;
+		font-size: 0.8em;
+	}
+	
+	&-header {
+		font-weight: bold;
+		background-image: var(--tint-2);
+	}
+	
+	&-label {
+		font-size: 90%;
+		font-weight: bold;
+		padding-left: 0.3em;
+		vertical-align: top;
+		width: 33%;
+		
+		a {
+			color: inherit;
+		}
+	}
+	
+	
+	&-data {
+		font-size: 90%;
+		padding: 0 0.3em;
+		vertical-align: top;
+	}
+	
+	&-image {
+		border: 1px solid transparent;
+		padding: 0 !important;
+		
+		img {
+			max-width: 100%;
+		}
+	}
+	
+	&-bar {
+		height: 4px;
+		background-image: var(--tint-2);
+	}
+	
+	&-title + &-bar {
+		display: none;
+	}
+	
+
+	&.colorize{
+		.#{$name}-title,
+		.#{$name}-header,
+		.#{$name}-bar {
+			background-color: var(--light, $background-color);
+		}
+	}
+}
