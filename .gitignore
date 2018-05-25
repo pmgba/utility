@@ -1,0 +1,7 @@
+.git
+package-lock.json
+.sass-cache
+dev
+node_modules
+*.bat
+src/scripts
