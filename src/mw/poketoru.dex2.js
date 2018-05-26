@@ -238,16 +238,17 @@ poketoruDex =  {
 			var pkmnSkill = pw.poketoru.skillList[pkmn.skills[0]][0];
 			var maxPower = 0;
 			var newSortValue = [pkmnNumber,pkmn.maxLevel,pkmn.maxPower,pkmn.type][sort];
-			if ( oldSortValue == -1 || oldSortValue != newSortValue ) stripIndex = (stripIndex==0)?1:0;
+			stripIndex=1;
+			//if ( oldSortValue == -1 || oldSortValue != newSortValue ) stripIndex = (stripIndex==0)?1:0;
 			oldSortValue = newSortValue;
 			var pkmnName = pw.util.getPokemonName(pkmnID).fullname.replace(/[（）]/g,'～');
 			pkmnName = pkmnName.replace(/～(.+?)～/,'<div style="line-height: 12px;font-size: 12px;transform: scale(0.7);">$1</div>');
 			pkmnName = '<a href="#" class="shuffledex-pkmnlink" data-pid="'+pkmnID+'">' + pkmnName + '</a>';
 			tbody += '<tr style="'+(stripIndex?'':'background-color:#f2f2f2;')+'">'
 				+'<td>'+pkmn.dex+'</td>'
-				+'<td><img class="shufflepokemon" src="' + pw.poketoru.getPoketoruIconSrc(pkmnID) + '" data-pid="'+pkmnID+'" style="width:32px;" /></td>'
+				+'<td><div class="shufflepokemon" data-pid="'+pkmnID+'">' + pw.sprite.create('poketoru',pkmnID,null,32) + '</div></td>'
 				+'<td>'+pkmnName+'</td>'
-				+'<td>'+pw.util.createColorlabel('span','type',pkmn.type,null,'colorlabel-fixed')+'</td>'
+				+'<td>'+pw.util.createColorlabel('span','type',pw.database.types.names['zh-cn'][pkmn.type])+'</td>'
 				+'<td>'+pw.poketoru.maxPower[pkmn.category][1]+'</td>'
 				+'<td>'+(pkmn.rml?'+'+pkmn.rml:'-')+'</td>'
 				+'<td>'+pkmn.maxPower+'</td>'
@@ -324,7 +325,7 @@ poketoruDex =  {
 		if ( !!pkmn.rml ) pkmnPower += '～' + pw.poketoru.maxPower[pkmn.category][maxLevel];
 
 		html = html.replace( '{pkmnicon}', '<img src="' + pw.poketoru.getPoketoruIconSrc(pkmnID) + '" />' );
-		html = html.replace( '{pkmntype}', pw.util.createColorlabel('span','type',pkmn.type,null,'colorlabel-fixed') );
+		html = html.replace( '{pkmntype}', pw.util.createColorlabel('span','type',pw.database.types.names['zh-cn'][pkmn.type]) );
 		html = html.replace( '{pkmnname}', pw.util.getPokemonName(pkmnID).fullname.replace(/[（）]/g,'～') );
 		html = html.replace( '{pkmnattack}', pkmnPower );
 		html = html.replace( '{pkmnrank}', pkmn.rank );
@@ -392,7 +393,7 @@ poketoruDex =  {
 				htmlMega += '<div class="row">';
 				htmlMega += '<div class="col-4"><img src="' + pw.poketoru.getPoketoruIconSrc(megaID) + '" /></div>';
 				htmlMega += '<div class="col-8 shuffle-data">';
-				htmlMega += '<div class="row"><div class="col-4">属性</div><div class="col-8">'+pw.util.createColorlabel('span','type',mega.type,null,'colorlabel-fixed')+'</div></div>';
+				htmlMega += '<div class="row"><div class="col-4">属性</div><div class="col-8">'+pw.util.createColorlabel('span','type',pw.database.types.names['zh-cn'][mega.type])+'</div></div>';
 				htmlMega += '<div class="row"><div class="col-4">超级进化速度</div><div class="col-8">'+mega.mb+'</div></div>';
 				htmlMega += '<div class="row shuffledex-editparent"><div class="col-4">超级进化加速</div><div class="col-xs-1"></div><div class="col-xs-6"><img src="/w/images/thumb/e/e7/Shuffle_Mega_Speedup.png/24px-Shuffle_Mega_Speedup.png" />'+mega.msu+'</div><div class="col-xs-1"><input class="shuffledex-edit" name="shuffledex-editmsu" type="checkbox" value="'+mega.msu+'" /></div></div>';
 				htmlMega += '<div class="row"><div class="col-4">超级进化效果</div><div class="col-8">'+megaEffects+'</div></div>';

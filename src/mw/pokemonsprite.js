@@ -26,18 +26,17 @@ pw.sprite = {
 			var pid = $this.data('pid');
 			var val = $this.data('val');
 			var width = $this.data('width');
-			$this.html( pw.sprite.create( ver, pid || val , width ) );
+			var html = pw.sprite.create( ver, String(pid), val, width );
+			if ( html ) {
+				$this.html( html );
+				$this.removeClass('js-sprite');
+			}
 		});
 	},
 	
-	create : function( ver, val, width ) {
-		var opt = {
-			i: val,
-			r: 1,
-			s: width,
-		};
+	create : function( ver, pid, val, width ) {
 		if ( ver === 'pi' ) {
-			var pid = String(val);
+			var opt = {};
 			var num = parseInt(pid.slice(0,3),10);
 			var fi  = parseInt(pid.slice(-2),10);
 			var fil = ( fi == 0 ) ? -1 : pw.sprite.fullFormIDList.indexOf(pid);
@@ -49,15 +48,17 @@ pw.sprite = {
 				opt.url = 'http://res.pokemon.name/common/pokemon/pi2.png';
 			}
 			opt.r = 10; opt.w = 40; opt.h = 30;
-		} else if ( ver ==='type' ) {
-			opt.url = 'http://www.pokemon.name/w/images/3/3d/Sprite_Type_Icons.png';
-			opt.w = 48; opt.h = 48;
+			return pw.sprite.createHtml( opt.url, opt.w, opt.h, opt.r, opt.i, width );
+		} else if ( ver in pw.sprite.modules ) {
+			var opt = pw.sprite.modules[ver];
+			if ( opt.getIndex ) val = opt.getIndex(pid);
+			return pw.sprite.createHtml( opt.url, opt.width, opt.height, opt.col, val, width );
 		}
-		return pw.sprite.createHtml( opt.url, opt.w, opt.h, opt.r, opt.i, opt.s );
 	},
 
 	createHtml : function( url, w, h, r, i, s ) {
 		if ( s ) {
+			s = String(s).replace('px','');
 			var c = s / w;
 			var html =  '<div style="display:inline-block;vertical-align:bottom;'+
 				'background:url(' + url + ') no-repeat -' + ( w * ( i % r ) * c ) + 'px -' + ( h * Math.floor( i / r ) * c ) + 'px;'+
@@ -76,10 +77,11 @@ pw.sprite = {
 	},
 	
 	modules : {
-		'poketoru' : {
-			init : function(){
-				pw.loader.using( 'poketoru.js' );
-			},
+		'type' : {
+				url : 'http://www.pokemon.name/w/images/3/3d/Sprite_Type_Icons.png',
+				width : 48,
+				height : 48,
+				col : 1
 		},
 	}
 };

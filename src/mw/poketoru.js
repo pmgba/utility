@@ -550,10 +550,6 @@ poketoru = pw.poketoru = {
 		});
 	},
 
-	getIconIndex : function ( pid ) {
-		return pw.poketoru.getPokemonData(pid).icon;
-	},
-
 	getPoketoruIconSrc : function ( pkmnID ) {
 		return pw.util.getResUrl('/sprites/side/shuffle/pokemon/'+pkmnID+'.png');
 	},
@@ -615,10 +611,11 @@ poketoru = pw.poketoru = {
 
 		var title = '<a href="' + mw.util.getUrl('宝可消消乐/宝可梦') + '#' + pkmnID + '">' + pkmn.dex + ' ' + pkmn.name + '</a>';
 
-		pw.poketoru.$popup.find('.poketoruTip-img').html('<img src="' + pw.poketoru.getPoketoruIconSrc(pkmnID) + '" />');
+		//pw.poketoru.$popup.find('.poketoruTip-img').html('<img src="' + pw.poketoru.getPoketoruIconSrc(pkmnID) + '" />');
+		pw.poketoru.$popup.find('.poketoruTip-img').html(pw.sprite.create('poketoru',pkmnID));
 		pw.poketoru.$popup.find('.poketoruTip-name').html(title);
 		pw.poketoru.$popup.find('.poketoruTip-form').html(pkmn.form);
-		pw.poketoru.$popup.find('.poketoruTip-type').html(pw.util.createColorlabel('span','type',pkmn.type,null,'colorlabel-fixed'));
+		pw.poketoru.$popup.find('.poketoruTip-type').html(pw.util.createColorlabel('span','type',pw.database.types.names['zh-cn'][pkmn.type]));
 		pw.poketoru.$popup.find('.poketoruTip-attack').html(pkmnPower);
 		pw.poketoru.$popup.find('.poketoruTip-skill').remove();
 		$.each( pkmn.skills, function(i,s){
@@ -646,8 +643,9 @@ poketoru = pw.poketoru = {
 				var $mega = $(pw.poketoru.megaHtml);
 				var mega = pw.poketoru.getPokemonData(megaID);
 				var megaEffects = pw.poketoru.megaEffects[mega.skills[0]].replace('$1',mega.name);
-				$mega.find('.poketoruTip-img').html('<img src="' + pw.poketoru.getPoketoruIconSrc(megaID) + '" />');
-				$mega.find('.poketoruTip-type').html(pw.util.createColorlabel('span','type',mega.type,null,'colorlabel-fixed'));
+				//$mega.find('.poketoruTip-img').html('<img src="' + pw.poketoru.getPoketoruIconSrc(megaID) + '" />');
+				$mega.find('.poketoruTip-img').html(pw.sprite.create('poketoru',megaID));
+				$mega.find('.poketoruTip-type').html(pw.util.createColorlabel('span','type',pw.database.types.names['zh-cn'][mega.type]));
 				$mega.find('.poketoruTip-megabar .value1').html(mega.mb);
 				$mega.find('.poketoruTip-megabar .value2').html(mega.msu);
 				$mega.find('.poketoruTip-megaeffects').html(megaEffects);
@@ -679,17 +677,14 @@ poketoru = pw.poketoru = {
 	init : function() {
 		$.extend( true, pw.database.pokemon.forms['zh-cn'], pw.poketoru.extendFormNames );
 
-		$('.js-sprite[data-version=poketoru]').each( function(){
-			var opt = {
-				url : 'http://wx1.sinaimg.cn/large/9df85f1fgy1frfute7f3gj21e01t04qp.jpg',
-				width : 60,
-				height : 60,
-				col : 30,
-				index : pw.poketoru.getIconIndex( $(this).data('pid') )
-			};
-			$(this).html( pw.sprite.create( opt.url, opt.width, opt.height, opt.col, opt.index, $(this).data('width') ) );
-		});
-		
+		pw.sprite.modules.poketoru = {
+			url : 'http://wx1.sinaimg.cn/large/9df85f1fgy1frodw6bsdmj21e01t01ky.jpg',
+			width : 60,
+			height : 60,
+			col : 30,
+			getIndex : function(pid){ return pw.poketoru.getPokemonData(pid).icon; },
+		};
+		pw.sprite.apply();
 		mw.util.addCSS(
 			  '.poketoruTip { width: 300px !important; padding: 5px; text-align: center; font-size: 12px; }'
 			+ '.poketoruTip-row { width: 100%; border-collapse: collapse; }'
@@ -710,7 +705,7 @@ poketoru = pw.poketoru = {
 };
 
 
-pw.loader.using( [ 'pokemon.js', 'poketoru.pokemon.js', 'webui-popover'], function() {
+pw.loader.using( [ 'pokemon.js', 'poketoru.pokemon.js', 'pokemonsprite.js', 'webui-popover'], function() {
 	pw.poketoru.init();
 	pw.poketoru.createPoketoruTooltips();
 });

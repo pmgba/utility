@@ -7,14 +7,14 @@
 .hlist dl,
 .hlist ol,
 .hlist ul {
-    margin: 0;
+		margin: 0 !important;
     padding: 0;
 }
 /* Display list items inline */
 .hlist dd,
 .hlist dt,
 .hlist li {
-    margin: 0;
+		margin: 0 !important;
     display: inline;
 }
 /* Display nested lists inline */

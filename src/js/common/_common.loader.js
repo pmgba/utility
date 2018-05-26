@@ -31,6 +31,11 @@ pw.loader = {
     'ionicons' : [
       '//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css'
     ],
+    'uikit' : [
+      '//cdn.bootcss.com/uikit/3.0.0-rc.2/css/uikit.min.css',
+      '//cdn.bootcss.com/uikit/3.0.0-rc.2/js/uikit.min.js',
+      '//cdn.bootcss.com/uikit/3.0.0-rc.2/js/uikit-icons.min.js'
+    ],
   },
   
   using: function( scripts, callback ) {

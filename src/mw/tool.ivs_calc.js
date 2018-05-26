@@ -5,10 +5,20 @@ pw.loader.using( [ 'pokemon.js', 'pokemon.7.js' ], function(){
 
 var COLORNAMES = ["red","blue","yellow","green","black","brown","purple","gray","white","pink"];
 
+mw.util.addCSS(''
++'.pw-jscontent input[type=text] {	text-align:right;	width:50px;	border:0px;}'
++'.pw-jscontent td.input{	border-width:2px !important;}'
++'.pw-jscontent td.input, td.select {	padding:0px !important;}'
+);
+
+function rearrangeBaseStats ( x ) {
+	return [x[0],x[1],x[2],x[4],x[5],x[3]];
+}
+		
 ////////////////////
 
 var table='';
-table+='<table class="colortable pokemoncolor" id="calc" style="text-align:center;width:560px">';
+table+='<table class="colortable colortable-colsep-1 colortable-rowsep-1 colorize " id="calc" style="text-align:center;width:560px">';
 table+='<tr><th style="width:200px">精灵</td><th style="width:50px">能力</td><th>种族值</td><th>努力值</td><th>性格</td><th>能力值</td><th style="width:50px">个体值</td></tr>';
 for (i=0;i<=5;i++) {
 	table+='<tr>';
@@ -138,20 +148,20 @@ window.SelectPokemon = function(num) {
 		for (i=0;i<formcounts[p];i++) {
 			var key = p + '.' + String('00').concat(i).slice(-2);
 			var name = pw.util.getPokemonName(key);
-			options += '<option value='+key+' >'+ ( name[1].length>0 ? name[1] : name[0] ) +'</option>';
+			options += '<option value='+key+' >'+ ( name.form || name.name ) +'</option>';
 		}
 		$('#form').html(options);
 		SelectForm(p.concat('.00'));
-		var color = pw.database.pokemon.colors[num];
-		$("#calc").attr('class','colortable pokemoncolor pokemoncolor-'+COLORNAMES[color]);
-		$("#stats").attr('class','colortable colortable-colborder-single colortable-rowborder-single pokemoncolor pokemoncolor-'+COLORNAMES[color]);
+		//var color = pw.database.pokemon.colors[num];
+		//$("#calc").attr('class','colortable pokemoncolor pokemoncolor-'+COLORNAMES[color]);
+		//$("#stats").attr('class','colortable colortable-colborder-single colortable-rowborder-single pokemoncolor pokemoncolor-'+COLORNAMES[color]);
 	}
 }
 
 window.SelectForm = function(key) {
 	var num = parseInt(key.split('.')[0]);
 	$('#Sprite').html('<a href="/wiki/' + pw.util.getPokemonName(num)+ '" title="' + pw.util.getPokemonName(num) + '">' + pw.util.createPokemonImage('pgl',key,'width:80%;') + '</a>');
-	var bs = pw.util.rearrangeBaseStats(pw.database.pokemon.data[7][key]['b']);
+	var bs = rearrangeBaseStats(pw.database.pokemon.data[7][key].basestats);
 	for ( i=0;i<=5;i++ ) {
 		$BSs[i].value=bs[i];
 	}
