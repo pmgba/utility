@@ -4,6 +4,7 @@
 	}
 }
 .colortable {
+	border-collapse: separate;
 	border: 1px solid $border-color;
 	border-radius: $border-radius;
 	background-color: var(--light, $background-color);

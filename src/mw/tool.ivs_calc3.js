@@ -1,56 +1,87 @@
 // [[分类:脚本文件]]
 // 这个文件由[[Iv calculator]]调用。
 
-pw.loader.using( [ 'pokemon.js', 'pokemon.7.js' ], function(){
+pw.loader.using( [ 'pokemon.js', 'pokemon.7.js', 'bootstrap' ], function(){
 
 mw.util.addCSS(''
-+'.pw-jscontent input[type=text] {	text-align:right;	width:50px;	border:0px;}'
-+'.pw-jscontent td.input{	border-width:2px !important;}'
-+'.pw-jscontent td.input, td.select {	padding:0px !important;}'
++'.pw-jscontent, .pw-jscontent input.form-control { text-align:center;}'
++'.calc-nt1,.calc-nt2 {display:none;}.calc-nt1+label,.calc-nt2+label{font-weight:bold;color:#ccc;border:1px solid #ccc;border-radius:24px;font-size:20px;line-height:100%;padding:3px;margin:0;font-family: monospace;vertical-align: middle;}.calc-nt1:checked+label{background:#f88;color:white;border-color:#f88;}.calc-nt2:checked+label{ background:#88f;color:white;border-color:#88f;}'
 );
+
+var n_n=['勤奋','怕寂寞','勇敢','固执','顽皮','大胆','坦率','悠闲','淘气','乐天','胆小','急躁','认真','爽朗','天真','内敛','慢吞吞','冷静','害羞','马虎','温和','温顺','自大','慎重','浮躁'];
+var n_v = ["0/0","0/0","0/1","0/2","0/3","0/4","0/0","1/0","1/1","1/2","1/3","1/4","0/0","2/0","2/1","2/2","2/3","2/4","0/0","3/0","3/1","3/2","3/3","3/4","0/0","4/0","4/1","4/2","4/3","4/4"];
+var p_n=['非常喜欢吃东西','经常睡午觉','常常打瞌睡','经常乱扔东西','喜欢悠然自在','以力气大为傲','喜欢胡闹','有点容易生气','喜欢打架','血气方刚','身体强壮','抗打能力强','顽强不屈','能吃苦耐劳','善于忍耐','喜欢比谁跑得快','对声音敏感','冒冒失失','有点容易得意忘形','逃得快','好奇心强','喜欢恶作剧','做事万无一失','经常思考','一丝不苟','性格强势','有一点点爱慕虚荣','争强好胜','不服输','有一点点固执'];
 
 function rearrangeBaseStats ( x ) {
 	return [x[0],x[1],x[2],x[4],x[5],x[3]];
 }
-		
+
+
 ////////////////////
 
+	var html = ''
++'<div class="card border-primary shuffledex">'
++'<div class="card-header border-primary bg-primary">'
++'<div class="nav nav-tabs card-header-tabs">'
++'	<a class="nav-item nav-link calc-tab active" data-toggle="tab" href="#calc-tab">个体值计算器</a>'
++'</div>'
++'</div>'
++'<div class="card-body">'
++'<div class="container-fluid">'
++'<div class="tab-content">'
++'<div class="tab-pane fade show active" id="calc-tab"><div class="row">'
++'		<div class="col-12 col-lg-3">'
++'		<div class="form-group"><label>宝可梦</label></div>'
++'		<div class="form-group row"><div class="col-12 calc-sprite"></div></div>'
++'		<div class="form-group row">'
++'		<div class="col-8"><select class="form-control calc-selectPokemon" /></div>'
++'		<div class="col-4"><select class="form-control calc-selectForm" /></div>'
++'		</div>'
++'		</div>'
++'		<div class="col-12 col-lg-9">'
++'		<div class="form-group row"><label class="col-1">能力</label><label class="col-2">种族值</label><label class="col-2">努力值</label><label class="col-2">性格</label><label class="col-2">能力值</label><label class="col-3">个体值</label></div>'
++(function(){
+	var x='';
+	for (i=0;i<=5;i++) {
+	x+='<div class="form-group row">'
++'<label class="col-1">'+['HP','攻击','防御','特攻','特防','速度'][i]+'</label>'
++'<div class="col-2"><input type="text" class="form-control calc-bs" value="0" maxlength="3"></div>'
++'<div class="col-2"><input type="text" class="form-control calc-ev" value="0" maxlength="3"></div>'
++'<div class="col-2">' + ((i==0)?'':'<input type="radio" class="form-check-input calc-nt1 " name="nature1" id="n1'+(i-1)+'" value="'+(i-1)+'"><label for="n1'+(i-1)+'">＋</label>　<input type="radio" class="form-check-input calc-nt2" id="n2'+(i-1)+'" name="nature2" value="'+(i-1)+'"><label for="n2'+(i-1)+'">－</label>') + '</div>'
++'<div class="col-2"><input type="text" class="form-control calc-stat" value="0" maxlength="3"></div>'
++'<div class="col-3"><input type="text" class="form-control calc-iv" value="0" maxlength="3"></div>'
++'</div>';
+	}
+	return x;
+})()
++'<div class="form-group row"><label class="col-1">等级</label><div class="col-2"><input type="text" class="form-control calc-level" value="1" maxlength="3"></div>'
++'<div class="col-2"><select class="form-control calc-selectEV">'
++'<option value="0/0/0/0/0/0" selected>全0</option>'
++'<option value="252/0/0/0/0/252">HP速度252</option>'
++'<option value="0/252/0/0/0/252">攻击速度252</option>'
++'<option value="0/0/0/252/0/252">特攻速度252</option>'
++'<option value="252/0/252/0/0/0">HP防御252</option>'
++'<option value="252/0/0/0/252/0">HP特防252</option>'
++'<option value="0/0/252/0/252/0">防御特防252</option>'
++'<option value="252/252/252/252/252/252">全满</option>'
++'</select></div>'
++'<div class="col-2"><select class="form-control calc-selectNature">'
++(function(){
+	var x='';
+	for (i=0;i<n_n.length;i++) {
+	x+='<option value="'+n_v[i]+'">'+n_n[i]+'</option>';
+	}
+	return x;
+})()
++'</select></div>';
++'		</div>'
++'</div></div></div></div></div></div>'
+;
+/*
 var table='';
-table+='<table class="colortable colortable-colsep-1 colortable-rowsep-1 colorize " id="calc" style="text-align:center;width:560px">';
-table+='<tr><th style="width:200px">精灵</td><th style="width:50px">能力</td><th>种族值</td><th>努力值</td><th>性格</td><th>能力值</td><th style="width:50px">个体值</td></tr>';
-for (i=0;i<=5;i++) {
-	table+='<tr>';
-	if (i==0) table+='<td id="Sprite" rowspan="6">&nbsp;</td>';
-	table+='<td>'+['HP','攻击','防御','特攻','特防','速度'][i]+'</td>';
-	table+='<td class="input"><input type="text" class="BS" value="0" maxlength="3" onkeyup="CalcSingle('+i+');"></td>';
-	table+='<td class="input"><input type="text" class="EV" value="0" maxlength="3" onkeyup="CalcSingle('+i+');"></td>';
-	if (i==0) {table+='<td style="font-size:90%">＋　－</td>'}else{table+='<td><input type="radio" class="Nature1" name="NatureP" onclick="CalcAll();" value="'+(i-1)+'"><input type="radio" class="Nature2" name="NatureM" onclick="CalcAll();" value="'+(i-1)+'"></td>'};
-	table+='<td class="input"><input type="text" class="Stat" maxlength="3" onkeyup="CalcSingle('+i+');"></td>';
-	table+='<td class="IV">&nbsp;</td></tr>';
-}
-table+='<tr><td class="select">';
-//table+='<select id="gen" onChange="SelectGen(value)" style="width:40px"><option value=0 selected></option>';
-//for (i=1;i<=6;i++) { table+='<option value='+i+' >'+i+'</option>'; }
-//table+='</select>';
-table+='<select id="pokemon" onChange="SelectPokemon(value)" style="width:120px">';
-table+='</select>';
-table+='<select id="form" onChange="SelectForm(value)" style="width:70px"></select>';
-table+='</td>';
 table+='<td>等级</td><td class="input"><input type="text" id="LV" value="1" maxlength="3" onkeyup="CalcAll();"></td>';
-table+='<td class="select"><select onChange="SelectEVs(value)">';
-table+='<option value="0/0/0/0/0/0" selected>全0</option>';
-table+='<option value="252/0/0/0/0/252">HPSP</option>';
-table+='<option value="0/252/0/0/0/252">ATSP</option>';
-table+='<option value="0/0/0/252/0/252">SASP</option>';
-table+='<option value="252/0/252/0/0/0">HPDF</option>';
-table+='<option value="252/0/0/0/252/0">HPSD</option>';
-table+='<option value="0/0/252/0/252/0">DFSD</option>';
-table+='<option value="252/252/252/252/252/252">全满</option>';
-table+='</select></td>';
 table+='<td class="select"><select onChange="SelectNature(value)">';
-var n_v = ["0/0","0/0","0/1","0/2","0/3","0/4","0/0","1/0","1/1","1/2","1/3","1/4","0/0","2/0","2/1","2/2","2/3","2/4","0/0","3/0","3/1","3/2","3/3","3/4","0/0","4/0","4/1","4/2","4/3","4/4"];
-var n_n = ["----","努力","寂寞","固执","顽皮","勇敢","----","大胆","坦率","淘气","无虑","悠闲","----","谨慎","温和","腼腆","马虎","冷静","----","安静","温顺","慎重","浮躁","傲慢","----","胆小","急躁","开朗","天真","认真"];
-for (var i=0;i<n_v.length;i++) { table+='<option value="'+n_v[i]+'">'+n_n[i]+'</option>'; }
+for (var i=0;i<n_v.length;i++) { table+=; }
 table+='</select></td><td id="HP">&nbsp;</td><td id="IV_SUM" style="padding:0;font-size:88%">&nbsp;</td></tr>';
 table+='<tr><th colspan=7><hr/></th></tr>';
 table+='<tr class="advance"><th>个性</th><th colspan=6 style="padding:0"><select id="Characteristic" style=width:100% onChange="CreateURL()" >'
@@ -85,22 +116,23 @@ table+='<div style="overflow-y: scroll;height: 100%; width:100%; style=text-alig
 table+='<div id="details"></div></div></td></tr>';
 table+='<tr class="toggle"><th colspan="7"><input type="button" style="width:74%;" onclick="$(\'tr.advance\').show();$(\'tr.toggle\').hide();" value="高级选项"><input type="button" style="width:24%;" onclick="calcStats();" value="能力值反查"></th></tr>';
 table+='<tr><td colspan="7"><input type="text" id="URL" style="width:540px;text-align:left" onfocus="$(this).select();" ></td></tr>';
-table+='</table>';
-
-$(".pw-jscontent").html(table);
+table+='</table></div></div>';
+*/
+$(".pw-jscontent").html(html);
 $("tr.advance").hide();
+
 
 ////////////////////
 //var CharacteristicIVs=[[0,5,10,15,20,25,30],[1,6,11,16,21,26,31],[2,7,12,17,22,27],[3,8,13,18,23,28],[4,9,14,19,24,29]];
 
 var Working = false;
-var $BSs = $('input.BS');
-var $EVs = $('input.EV');
-var $IVs = $('td.IV');
-var $Stats = $('input.Stat');
-var $LV = $('input#LV');
-var N1 = document.getElementsByName('NatureP');
-var N2 = document.getElementsByName('NatureM');
+var $BSs = $('.calc-bs');
+var $EVs = $('.calc-ev');
+var $IVs = $('.calc-iv');
+var $Stats = $('.calc-stat');
+var $LV = $('.calc-level');
+var N1 = $('.calc-nt1');
+var N2 = $('.calc-nt2');
 var minIVs=[-1,-1,-1,-1,-1,-1];
 var maxIVs=[-1,-1,-1,-1,-1,-1];
 var HP_Value = [1,2,4,8,16,32];
@@ -109,37 +141,25 @@ var isUniqueResult = false;
 var digit=/^\d+$/;
 
 var formcounts = {};
-for (i=0;i<=802;i++) {
-	formcounts[String('00').concat(i).slice(-3)]=0;
-}
 $.each(pw.database.pokemon.data[7],function(k,v){
 	var x = k.split('.');
-	formcounts[x[0]] += 1;
+	formcounts[x[0]] = 1 + (formcounts[x[0]] || 0);
 });
 
-window.SelectGen = function( num ) {
-	var num_begin = 1, num_end = 802;
-	switch ( parseInt(num) ) {
-		case 1: num_begin = 1;   num_end = 151; break;
-		case 2: num_begin = 151; num_end = 251; break;
-		case 3: num_begin = 252; num_end = 386; break;
-		case 4: num_begin = 387; num_end = 493; break;
-		case 5: num_begin = 494; num_end = 649; break;
-		case 6: num_begin = 650; num_end = 721; break;
-		case 7: num_begin = 722; num_end = 807; break;
-	}
-	var options = '<option value=0 selected></option>';
+SelectGen = function( num ) {
+	var num_begin = 1, num_end = 807;
+	var options = '<option value="0" selected></option>';
 	for (i=num_begin;i<=num_end;i++) {
-		options += '<option value='+i+' >'+ String('00').concat(i).slice(-3) +' '+pw.util.getPokemonName(i)+'</option>';
+		options += '<option value="'+i+'" >'+ String('00').concat(i).slice(-3) +' '+pw.util.getPokemonName(i)+'</option>';
 	}
-	$('#pokemon').empty().html(options);
-	SelectPokemon(0);
+	$('.calc-selectPokemon').empty().html(options);
+	SelectPokemon(1);
 }
 
-window.SelectPokemon = function(num) {
-	$('#form').empty();
+SelectPokemon = function(num) {
+	$('.calc-selectForm').empty();
 	if ( num == 0 ) {
-		$('#Sprite').html('&nbsp;');
+		$('.calc-sprite').html('&nbsp;');
 	}else{
 		var p = String('00').concat(num).slice(-3);
 		var options = '';
@@ -148,7 +168,7 @@ window.SelectPokemon = function(num) {
 			var name = pw.util.getPokemonName(key);
 			options += '<option value='+key+' >'+ ( name.form || name.name ) +'</option>';
 		}
-		$('#form').html(options);
+		$('.calc-selectForm').html(options);
 		SelectForm(p.concat('.00'));
 		//var color = pw.database.pokemon.colors[num];
 		//$("#calc").attr('class','colortable pokemoncolor pokemoncolor-'+COLORNAMES[color]);
@@ -156,19 +176,18 @@ window.SelectPokemon = function(num) {
 	}
 }
 
-window.SelectForm = function(key) {
+SelectForm = function(key) {
 	var num = parseInt(key.split('.')[0]);
-	$('#Sprite').html('<a href="/wiki/' + pw.util.getPokemonName(num)+ '" title="' + pw.util.getPokemonName(num) + '">' + pw.util.createPokemonImage('pgl',key,'width:80%;') + '</a>');
+	$('.calc-sprite').html('<a href="/wiki/' + pw.util.getPokemonName(num)+ '" title="' + pw.util.getPokemonName(num) + '">' + pw.util.createPokemonImage('pgl',key,'width:80%;') + '</a>');
 	var bs = rearrangeBaseStats(pw.database.pokemon.data[7][key].basestats);
 	for ( i=0;i<=5;i++ ) {
 		$BSs[i].value=bs[i];
 	}
-	CalcAll();
+	//CalcAll();
 }
 
-SelectGen(0);
 
-window.SelectEVs = function(value) {
+SelectEVs = function(value) {
 	var EVs=value.split("/");
 	for ( i=0;i<=5;i++ ) {
 		$EVs[i].value=EVs[i];
@@ -176,7 +195,7 @@ window.SelectEVs = function(value) {
 	CalcAll();
 }
 
-window.SelectNature = function(value) {
+SelectNature = function(value) {
 	var N=value.split("/");
 	if (N[0]==N[1]) {
 		for (i=0;i<=4;i++){
@@ -191,9 +210,7 @@ window.SelectNature = function(value) {
 }
 
 
-
-
-window.CalcAll = function() {
+CalcAll = function() {
 	var N = [0,1,1,1,1,1];
 	for (i=0;i<=4;i++){
 		if (N1[i].checked&&N2[i].checked) break;
@@ -209,20 +226,23 @@ window.CalcAll = function() {
 		if (minIVs[i]==-1){
 			isUniqueResult=false;
 			hasResults=false;
-			$IVs[i].innerHTML = "?";
+			$IVs[i].value = "?";
 		} else if (minIVs[i]==maxIVs[i]){
+			$IVs[i].value = minIVs[i];
+			/*
 			if ( ($Stats[i].value != CalcStat($LV.val(),$BSs[i].value,$EVs[i].value,minIVs[i],N[j])) ) {
 				$('#HP').html( "&nbsp;" );
 				$('#IV_SUM').html("&nbsp;" );
-				$IVs[i].innerHTML = "?";
+				$IVs[i].value = "?";
 				isUniqueResult=false;
 				hasResults=false;
 			} else {
-				$IVs[i].innerHTML = minIVs[i];
+				$IVs[i].value = minIVs[i];
 			}
+			*/
 		} else {
 			isUniqueResult=false;
-			$IVs[i].innerHTML = minIVs[i] + "～" + maxIVs[i];
+			$IVs[i].value = minIVs[i] + "～" + maxIVs[i];
 		}
 	}
 	if(isUniqueResult){
@@ -237,7 +257,7 @@ window.CalcAll = function() {
 
 	CreateURL();
 }
-
+/*
 window.CalcSingle = function(S) {
 	//if (($('#Characteristic')[0].selectedIndex>0)||($('#HPType')[0].selectedIndex>0)){
 	//	CalcAll();
@@ -296,8 +316,8 @@ window.CalcSingle = function(S) {
 
 	CreateURL();
 }
-
-window.CalcDetails = function() {
+*/
+CalcDetails = function() {
 	var CheckMax = false;
 	var isMax=[false,false,false,false,false,false];
 	
@@ -477,7 +497,7 @@ function CalcStat(LV,BS,EV,IV,Nature) {
 	return s;
 }
 
-window.calcStats = function() {
+calcStats = function() {
 	if ( $('#stats').length == 0 ) {
 		var table='';
 		table+='<table class="colortable colortable-colborder-single colortable-rowborder-single pokemoncolor" id="stats" style="text-align:center;width:560px">';
@@ -569,9 +589,10 @@ function CheckCHR(x,CHRType,CHRRank) {
 
 //////////////////////////
 
-window.CreateURL = function() {
+CreateURL = function() {
+	return '';
 	var url = 'http://www.pokemon.name/w/index.php?title=' + mw.config.get('wgPageName');
-	if ($("#pokemon")[0].selectedIndex > 0) url += '&pid=' + $("#pokemon")[0].selectedIndex;
+	if ($(".calc-selectPokemon")[0].selectedIndex > 0) url += '&pid=' + $(".calc-selectPokemon")[0].selectedIndex;
 	if ($LV.val()!=1) url += '&plv=' + $LV.val();
 	var Stats='';
 	for ( var i = 0; i <= 5; i++) { Stats += ',' + $Stats[i].value;}
@@ -587,10 +608,10 @@ window.CreateURL = function() {
 		if (N2[i].checked) PN2=i+1;
 	}
 	if ( PN1+PN2>0 ) url += '&pn=' + PN1 + ',' + PN2;
-	if ( $('#HPType')[0].selectedIndex>0 ) url += '&ph=' + $('#HPType')[0].selectedIndex;
-	if ( $('#Characteristic')[0].selectedIndex>0 ) url += '&pc=' + $('#Characteristic')[0].selectedIndex;
-	if ( $('#SumIVs')[0].selectedIndex>0 ) url += '&psiv=' + $('#SumIVs')[0].selectedIndex;
-	if ( $('#HighestIV')[0].selectedIndex>0 ) url += '&phiv=' + $('#HighestIV')[0].selectedIndex;
+	//if ( $('#HPType')[0].selectedIndex>0 ) url += '&ph=' + $('#HPType')[0].selectedIndex;
+	//if ( $('#Characteristic')[0].selectedIndex>0 ) url += '&pc=' + $('#Characteristic')[0].selectedIndex;
+	//if ( $('#SumIVs')[0].selectedIndex>0 ) url += '&psiv=' + $('#SumIVs')[0].selectedIndex;
+	//if ( $('#HighestIV')[0].selectedIndex>0 ) url += '&phiv=' + $('#HighestIV')[0].selectedIndex;
 	var $hiv = $('.Highest');
 	var hiv='';
 	for ( var i = 0; i <= 5; i++) { hiv += ($hiv[i].checked)?'1':'0' }
@@ -651,4 +672,8 @@ if ( window.location.href.indexOf('/w/') > 1 ) {
 	}
 }
 
+SelectGen(0);
+$('.calc-selectPokemon').change(function(){SelectPokemon(this.value);});
+$('.calc-selectForm').change(function(){SelectForm(this.value);});
+$('.pw-jscontent input').change(CalcAll);
 });

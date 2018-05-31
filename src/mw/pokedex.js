@@ -6,7 +6,7 @@ pokedex = {
 		var name = pw.util.getPokemonName( pid );
 
 		tr += '<tr style="line-height:30px;">';
-		tr += '<td>' + pw.util.createPokemonIconS(pid).prop("outerHTML") + '</td>';
+		tr += '<td>' + pw.sprite.create('pi',pid) + '</td>';
 		tr += '<td>#'+num[0]+'</td>';
 		tr += '<td><a href="'+mw.util.getUrl(name[0])+'">'+name[2]+'</a></td>';
  
@@ -174,7 +174,7 @@ pokedex = {
 	},
 	
 	init : function(){
-		pw.loader.using( [ 'pokemon.js', 'pokemon.7.js', 'bootstrap'], function(){
+		pw.loader.using( [ 'pokemon.js', 'pokemon.7.js', 'pokemonsprite.js', 'bootstrap'], function(){
 			pokedex.genNames = [''];
 			for(var g=1;g<pw.info.maxPokemonCounts.length;g++){
 				pokedex.genNames[g] = '第' + '零一二三四五六七八九十'[g] + '世代';
