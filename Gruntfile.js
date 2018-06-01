@@ -1,10 +1,10 @@
 /*global module:false*/
-const webpackConfig = require('./webpack.config');
 
 module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
+    buildDir: 'dist',
     // Metadata.
     pkg: grunt.file.readJSON('package.json'),
     banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
@@ -116,6 +116,15 @@ module.exports = function(grunt) {
 	      }
 	    }
 	  },
+		requirejs: {
+			compile: {
+				options: {
+					name: 'pw',
+					mainConfigFile: 'src/scripts/pw2.js',
+					out: 'dist/pw2.js'
+				}
+			}
+		},
 	  sass: {
 	    dev: {
 	    	options: {
@@ -144,13 +153,6 @@ module.exports = function(grunt) {
 	      }]
 	    }
 	  },
-    webpack: {
-      options: {
-        stats: !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
-      },
-      prod: webpackConfig,
-      //dev: Object.assign({ watch: true }, webpackConfig)
-    }
   });
 
   // These plugins provide necessary tasks.
@@ -161,7 +163,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-webpack');
+	grunt.loadNpmTasks('grunt-contrib-requirejs');
 	
 	// Default task.
 	grunt.registerTask('css', ['sass:dev']);
@@ -169,6 +171,6 @@ module.exports = function(grunt) {
 	grunt.registerTask('dist', [ 'sass:dist','concat:dist','copy','uglify']);
 	
 	grunt.registerTask('dev', ['sass:dev', 'concat:dev', 'connect', 'watch']);
-	grunt.registerTask('webpack', ['webpack']);
+	grunt.registerTask('requirejs', ['requirejs']);
 
 }
