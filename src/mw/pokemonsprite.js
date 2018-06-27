@@ -83,6 +83,12 @@ pw.sprite = {
 				height : 48,
 				col : 1
 		},
+		'quest' : {
+				url : 'http://wx1.sinaimg.cn/large/9df85f1fgy1fsqavgbxp7j20e80xstb3.jpg',
+				width : 64,
+				height : 64,
+				col : 8
+		},
 	}
 };
 
