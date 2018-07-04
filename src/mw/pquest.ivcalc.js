@@ -233,8 +233,8 @@ pquestCalc =  {
 		var bsHp = pquestCalc.basestats[pi][0];
 		var bsAtk = pquestCalc.basestats[pi][1];
 		
-		var ivHp = hp - bsHp - lv - 1;
-		var ivAtk = atk - bsAtk - lv - 1;
+		var ivHp = hp - bsHp - lv;
+		var ivAtk = atk - bsAtk - lv;
 		
 		$('.calc__hpresult').val(ivHp);
 		$('.calc__atkresult').val(ivAtk);

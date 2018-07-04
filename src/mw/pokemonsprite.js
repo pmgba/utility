@@ -89,6 +89,12 @@ pw.sprite = {
 				height : 64,
 				col : 8
 		},
+		'questmove' : {
+				url : 'http://wx1.sinaimg.cn/large/9df85f1fgy1fsybpio4qbj20dc0mon2p.jpg',
+				width : 48,
+				height : 48,
+				col : 10
+		},
 	}
 };
 
