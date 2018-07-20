@@ -1,5 +1,6 @@
 body .cc,
-.colorize .cc {
+.colorize .cc,
+.colorize tr.cc > td {
 	border-color: #aaa;
 	border-color: var(--dark, #aaa);
 	background-color: var(--light, #ddd);
