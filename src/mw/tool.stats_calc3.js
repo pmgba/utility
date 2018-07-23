@@ -96,7 +96,6 @@ if ( pid != null ) {
 	selectPokemon(1);
 }
 
-SelectGen(0);
 $('.calc-selectPokemon').change(function(){selectPokemon(this.value);});
 $('.calc-selectForm').change(function(){selectForm(this.value);});
 $('.calc-selectNature').change(function(){selectNature(this.value);});
