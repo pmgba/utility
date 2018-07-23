@@ -1,4 +1,4 @@
-﻿$.extend( true, pokeWiki, {
+﻿$.extend( true, pw, {
 	database: {
 		pokemon: {
 			data  : {

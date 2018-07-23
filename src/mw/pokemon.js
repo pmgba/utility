@@ -1,4 +1,4 @@
-$.extend( true, pokeWiki, {
+$.extend( true, pw, {
 	info: {
 		maxPokemonCount : 807,
 		maxPokemonCounts : [0,151,251,386,493,649,721,807]

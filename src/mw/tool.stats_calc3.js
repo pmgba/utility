@@ -8,15 +8,15 @@ mw.util.addCSS(''
 +'.calc-nt1,.calc-nt2 {display:none;}.calc-nt1+label,.calc-nt2+label{font-weight:bold;color:#ccc;border:1px solid #ccc;border-radius:24px;font-size:20px;line-height:100%;padding:3px;margin:0;font-family: monospace;vertical-align: middle;}.calc-nt1:checked+label{background:#f88;color:white;border-color:#f88;}.calc-nt2:checked+label{ background:#88f;color:white;border-color:#88f;}'
 );
 
-var n_n=['-','勤奋','怕寂寞','勇敢','固执','顽皮','大胆','坦率','悠闲','淘气','乐天','胆小','急躁','认真','爽朗','天真','内敛','慢吞吞','冷静','害羞','马虎','温和','温顺','自大','慎重','浮躁'];
-var n_v = ['0/0','0/0','0/1','0/4','0/2','0/3','1/0','0/0','1/4','1/2','1/3','4/0','4/1','0/0','4/2','4/3','2/0','2/1','2/4','0/0','2/3','3/0','3/1','3/4','3/2','0/0'];
-
-function rearrangeBaseStats ( x ) {
-	return [x[0],x[1],x[2],x[4],x[5],x[3]];
-}
-
+var natureNames=['-','勤奋','怕寂寞','勇敢','固执','顽皮','大胆','坦率','悠闲','淘气','乐天','胆小','急躁','认真','爽朗','天真','内敛','慢吞吞','冷静','害羞','马虎','温和','温顺','自大','慎重','浮躁'];
 
 ////////////////////
+
+var formcounts = {};
+$.each(pw.database.pokemon.data[7],function(k,v){
+	var x = k.split('.');
+	formcounts[x[0]] = 1 + (formcounts[x[0]] || 0);
+});
 
 	var html = ''
 +'<div class="card border-primary shuffledex">'
@@ -56,19 +56,19 @@ function rearrangeBaseStats ( x ) {
 +'<div class="form-group row"><label class="col-1">等级</label><div class="col-2"><input type="text" class="form-control calc-level" value="1" maxlength="3"></div>'
 +'<div class="col-2"><select class="form-control calc-selectEV">'
 +'<option value="0/0/0/0/0/0" selected>全0</option>'
-+'<option value="252/0/0/0/0/252">HP速度252</option>'
-+'<option value="0/252/0/0/0/252">攻击速度252</option>'
-+'<option value="0/0/0/252/0/252">特攻速度252</option>'
++'<option value="252/0/0/252/0/0">HP速度252</option>'
++'<option value="0/252/0/0/252/0">攻击速度252</option>'
++'<option value="0/0/0/252/252/0">特攻速度252</option>'
 +'<option value="252/0/252/0/0/0">HP防御252</option>'
-+'<option value="252/0/0/0/252/0">HP特防252</option>'
-+'<option value="0/0/252/0/252/0">防御特防252</option>'
++'<option value="252/0/0/0/0/252">HP特防252</option>'
++'<option value="0/0/252/0/0/252">防御特防252</option>'
 +'<option value="252/252/252/252/252/252">全满</option>'
 +'</select></div>'
 +'<div class="col-2"><select class="form-control calc-selectNature">'
 +(function(){
 	var x='';
-	for (i=0;i<n_n.length;i++) {
-	x+='<option value="'+n_v[i]+'">'+n_n[i]+'</option>';
+	for (i=0;i<natureNames.length;i++) {
+	x+='<option value="'+(i-1)+'">'+natureNames[i]+'</option>';
 	}
 	return x;
 })()
@@ -77,45 +77,106 @@ function rearrangeBaseStats ( x ) {
 +'</div></div></div></div></div></div>'
 ;
 $(".pw-jscontent").html(html);
-$("tr.advance").hide();
 
-var Working = false;
-var $BSs = $('.calc-bs');
-var $EVs = $('.calc-ev');
-var $IVs = $('.calc-iv');
-var $Stats = $('.calc-stat');
-var $LV = $('.calc-level');
-var N1 = $('.calc-nt1');
-var N2 = $('.calc-nt2');
-var minIVs=[-1,-1,-1,-1,-1,-1];
-var maxIVs=[-1,-1,-1,-1,-1,-1];
-var HP_Value = [1,2,4,8,16,32];
-var hasResults = false;
-var isUniqueResult = false;
-var digit=/^\d+$/;
+var num_begin = 1, num_end = 807;
+var options = '<option value="0" selected></option>';
+for (i=num_begin;i<=num_end;i++) {
+	options += '<option value="'+i+'" >'+ String('00').concat(i).slice(-3) +' '+pw.util.getPokemonName(i)+'</option>';
+}
+$('.calc-selectPokemon').empty().html(options);
 
-var formcounts = {};
-$.each(pw.database.pokemon.data[7],function(k,v){
-	var x = k.split('.');
-	formcounts[x[0]] = 1 + (formcounts[x[0]] || 0);
-});
-
-SelectGen = function( num ) {
-	var num_begin = 1, num_end = 807;
-	var options = '<option value="0" selected></option>';
-	for (i=num_begin;i<=num_end;i++) {
-		options += '<option value="'+i+'" >'+ String('00').concat(i).slice(-3) +' '+pw.util.getPokemonName(i)+'</option>';
-	}
-	$('.calc-selectPokemon').empty().html(options);
-	SelectPokemon(1);
+var pid = mw.util.getParamValue('pid');
+if ( pid != null ) {
+	var x = pid.split('.');
+	selectPokemon( x[0], x[1]);
+	$('.calc-selectPokemon').val( x[0] );
+	$('.calc-selectForm').val( pid );
+} else {
+	$('.calc-selectPokemon').val( '001.00' );
+	selectPokemon(1);
 }
 
-SelectPokemon = function(num) {
+SelectGen(0);
+$('.calc-selectPokemon').change(function(){selectPokemon(this.value);});
+$('.calc-selectForm').change(function(){selectForm(this.value);});
+$('.calc-selectNature').change(function(){selectNature(this.value);});
+$('.calc-selectEV').change(function(){selectEVs(this.value);});
+$('.pw-jscontent input').change(calcAll);
+
+
+
+
+/************/
+
+function getValues( selector ) {
+	var $e = $(selector);
+	return [
+		parseInt($e[0].value,10),
+		parseInt($e[1].value,10),
+		parseInt($e[2].value,10),
+		parseInt($e[5].value,10),
+		parseInt($e[3].value,10),
+		parseInt($e[4].value,10),
+	];
+}
+
+function setValues( selector, values ) {
+	var $e = $(selector);
+	$e[0].value = values[0];
+	$e[1].value = values[1];
+	$e[2].value = values[2];
+	$e[3].value = values[4];
+	$e[4].value = values[5];
+	$e[5].value = values[3];
+}
+
+function getNatures( ) {
+	var nt1 = $('.calc-nt1:checked').val()*1+1;
+	var nt2 = $('.calc-nt2:checked').val()*1+1;
+	var n = [0,1,1,1,1,1];
+	if ( nt1 != nt2 ) {
+		n[nt1] = 1.1;
+		n[nt2] = 0.9;
+	}
+	return [ n[0], n[1], n[2], n[5], n[3], n[4] ];
+}
+function calcAll() {
+	var level = parseInt($('.calc-level').val(),10);
+	var bs = getValues('.calc-bs');
+	var ev = getValues('.calc-ev');
+	var iv = getValues('.calc-iv');
+	var nt = getNatures();
+	
+	
+	var stats = [];
+	for (i=0;i<=5;i++) {
+		stats[i] = calcStat(level, bs[i], ev[i], iv[i], nt[i] );
+	}
+	setValues( '.calc-stat', stats );
+}
+
+function calcStat(lv,bs,ev,iv,nt) {
+	if (lv == 0) return 0;
+	if (bs == 0) return 0;
+	if (bs == 1) return 1;
+	var s=0;
+	if ( nt == 0 ) { //HP
+		s = Math.floor((bs*2+iv+Math.floor(ev/4))*lv/100+10+lv);
+	} else { //AT..SP
+		s = Math.floor((bs*2+iv+Math.floor(ev/4))*lv/100+5);
+		s = Math.floor(s*nt);
+	}
+	return s;
+}
+
+function selectPokemon( num, form ) {
 	$('.calc-selectForm').empty();
 	if ( num == 0 ) {
 		$('.calc-sprite').html('&nbsp;');
 	}else{
 		var p = String('00').concat(num).slice(-3);
+		var f = String('00').concat(form || 0).slice(-2);
+		var pid = p + '.' + f;
 		var options = '';
 		for (i=0;i<formcounts[p];i++) {
 			var key = p + '.' + String('00').concat(i).slice(-2);
@@ -123,200 +184,38 @@ SelectPokemon = function(num) {
 			options += '<option value='+key+' >'+ ( name.form || name.name ) +'</option>';
 		}
 		$('.calc-selectForm').html(options);
-		SelectForm(p.concat('.00'));
+		
+		selectForm( pid );
 	}
 }
 
-SelectForm = function(key) {
+function selectForm(key) {
 	var num = parseInt(key.split('.')[0]);
 	$('.calc-sprite').html('<a href="/wiki/' + pw.util.getPokemonName(num)+ '" title="' + pw.util.getPokemonName(num) + '">' + pw.util.createPokemonImage('pgl',key,'width:80%;') + '</a>');
-	var bs = rearrangeBaseStats(pw.database.pokemon.data[7][key].basestats);
-	for ( i=0;i<=5;i++ ) {
-		$BSs[i].value=bs[i];
-	}
-	CalcAll();
+	setValues( '.calc-bs', pw.database.pokemon.data[7][key].basestats );
+	calcAll();
 }
 
-
-SelectEVs = function(value) {
-	var EVs=value.split("/");
-	for ( i=0;i<=5;i++ ) {
-		$EVs[i].value=EVs[i];
-	}
-	CalcAll();
+function selectEVs(value) {
+	var evs = value.split("/");
+	setValues( '.calc-ev', evs );
+	calcAll();
 }
-
-SelectNature = function(value) {
-	var N=value.split("/");
-	if (N[0]==N[1]) {
-		for (i=0;i<=4;i++){
-			N1[i].checked=false;
-			N2[i].checked=false;
-		}
-	}else{
-		N1[N[0]].checked=true;
-		N2[N[1]].checked=true;
-	}
-	CalcAll();
-}
-
-
-function CalcAll() {
-	var N = [0,1,1,1,1,1];
-	for (i=0;i<=4;i++){
-		if (N1[i].checked&&N2[i].checked) break;
-		if (N1[i].checked) N[i+1]=1.1;
-		if (N2[i].checked) N[i+1]=0.9;
-	}
-	for (S=0;S<=5;S++) {
-		$Stats[S].value = (CalcStat($LV.val(), $BSs[S].value, $EVs[S].value, $IVs[S].value, (S==0)?0:N[S-1] ) );
-	}
-	
-	CreateURL();
-}
-
-function CalcStat(LV,BS,EV,IV,Nature) {
-	if (LV == 0) return 0;
-	if (BS == 0) return 0;
-	if (BS == 1) return 1;
-	
-	LV=parseInt(LV,10);
-	BS=parseInt(BS,10);
-	EV=parseInt(EV,10);
-	IV=parseInt(IV,10);
-
-	var s;
-	
-	if ( Nature == 0 || Nature == undefined ) {
-		s = Math.floor((BS*2+IV+Math.floor(EV/4))*LV/100+10+LV);
+function selectNature(value) {
+	value = parseInt(value);
+	var v = [0,1,2,5,3,4];
+	if ( value == -1 ) {
+		$('.calc-nt1')[0].checked=true;
+		$('.calc-nt1')[0].checked=false;
+		$('.calc-nt2')[0].checked=true;
+		$('.calc-nt2')[0].checked=false;
 	} else {
-		s = Math.floor((BS*2+IV+Math.floor(EV/4))*LV/100+5);
-		s = Math.floor(s*Nature);
+		var nt1 = v[Math.floor(value/5) + 1];
+		var nt2 = v[value % 5 + 1];
+		$('.calc-nt1')[nt1-1].checked=true;
+		$('.calc-nt2')[nt2-1].checked=true;
 	}
-	
-	return s;
+	calcAll();
 }
-
-
-//////////////////
-function YtoX(y) {
-	return [y[0],y[1],y[2],y[5],y[3],y[4]];
-}
-function XtoY(x) {
-	return [x[0],x[1],x[2],x[4],x[5],x[3]];
-}
-
-function CalcHPType(x) {
-	var h=0;
-	for (var j=0;j<=5;j++) {
-		if(x[j]%2==1) h+=HP_Value[j];
-	}
-	return Math.floor(h*15/63)+1;
-}
-		
-function CalcHPPower(x) {
-	var p=0;
-	for (var j=0;j<=5;j++) {
-		if(x[j]%4>=2) p+=HP_Value[j];
-	}
-	return Math.floor(p*40/63)+30;
-}
-
-function CheckCHR(x,CHRType,CHRRank) {
-	var m=Math.max.apply({},x);
-	return (x[CHRType]==m&&m%5==CHRRank);
-}
-
-//////////////////////////
-
-CreateURL = function() {
-	return '';
-	var url = 'http://www.pokemon.name/w/index.php?title=' + mw.config.get('wgPageName');
-	if ($(".calc-selectPokemon")[0].selectedIndex > 0) url += '&pid=' + $(".calc-selectPokemon")[0].selectedIndex;
-	if ($LV.val()!=1) url += '&plv=' + $LV.val();
-	var Stats='';
-	for ( var i = 0; i <= 5; i++) { Stats += ',' + $Stats[i].value;}
-	if ( Stats != ',,,,,,' ) url += '&ps=' + Stats.substring(1);
-	var EVs='';
-	for ( var i = 0; i <= 5; i++) { EVs += ',' + $EVs[i].value;}
-	if ( EVs != ',0,0,0,0,0,0' ) url += '&pev=' + EVs.substring(1);
-	var PN1=0;
-	var PN2=0;
-	for ( var i = 0; i <= 4; i++) {
-		if (N1[i].checked && N2[i].checked) break;
-		if (N1[i].checked) PN1=i+1;
-		if (N2[i].checked) PN2=i+1;
-	}
-	if ( PN1+PN2>0 ) url += '&pn=' + PN1 + ',' + PN2;
-	//if ( $('#HPType')[0].selectedIndex>0 ) url += '&ph=' + $('#HPType')[0].selectedIndex;
-	//if ( $('#Characteristic')[0].selectedIndex>0 ) url += '&pc=' + $('#Characteristic')[0].selectedIndex;
-	//if ( $('#SumIVs')[0].selectedIndex>0 ) url += '&psiv=' + $('#SumIVs')[0].selectedIndex;
-	//if ( $('#HighestIV')[0].selectedIndex>0 ) url += '&phiv=' + $('#HighestIV')[0].selectedIndex;
-	var $hiv = $('.Highest');
-	var hiv='';
-	for ( var i = 0; i <= 5; i++) { hiv += ($hiv[i].checked)?'1':'0' }
-	if ( hiv != '000000' ) url += '&phiv2=' + hiv;
-	$('#URL').val(url);
-}
-
-if ( window.location.href.indexOf('/w/') > 1 ) {
-	var plv = mw.util.getParamValue('plv');
-	if ( plv != null ) { $LV.val( plv ); }
-
-	var ps = mw.util.getParamValue('ps');
-	if ( ps != null ) {
-		var ps2 = ps.split(',');
-		for ( var j = 0; j <= 5; j++) {
-			$Stats[j].value = ps2[j];
-		}
-	}
-
-	var pev = mw.util.getParamValue('pev');
-	if ( pev != null ) {
-		var pev2 = pev.split(',');
-		for ( var j = 0; j <= 5; j++) {
-			$EVs[j].value = pev2[j];
-		}
-	}
-
-	var pn = mw.util.getParamValue('pn');
-	if ( pn != null ) {
-		var pn2 = pn.split(',');
-		if (pn[0]>0) N1[pn2[0]-1].checked = true;
-		if (pn[1]>0) N2[pn2[1]-1].checked = true;
-	}
-
-	var ph = mw.util.getParamValue('ph');
-	if ( ph != null ) { $("#HPType")[0].selectedIndex = ph; }
-
-	var pc = mw.util.getParamValue('pc');
-	if ( pc != null ) { $("#Characteristic")[0].selectedIndex = pc; }
-
-	var psiv = mw.util.getParamValue('psiv');
-	if ( psiv != null ) { $("#SumIVs")[0].selectedIndex = psiv; }
-
-	var phiv = mw.util.getParamValue('phiv');
-	if ( phiv != null ) { $("#HighestIV")[0].selectedIndex = phiv; }
-
-	var phiv2 = mw.util.getParamValue('phiv2');
-	if ( phiv2 != null ) { 
-		for ( var j = 0; j <= 5; j++) {
-			$('.Highest')[j].checked=(phiv2[j]==1);
-		}
-	 }
-
-	var pid = mw.util.getParamValue('pid');
-	if ( pid != null ) {
-		$("#pokemon")[0].selectedIndex = pid;
-		SelectPokemon(pid);
-	}
-}
-
-SelectGen(0);
-$('.calc-selectPokemon').change(function(){SelectPokemon(this.value);});
-$('.calc-selectForm').change(function(){SelectForm(this.value);});
-$('.calc-selectNature').change(function(){SelectNature(this.value);});
-$('.calc-selectEV').change(function(){SelectEVs(this.value);});
-$('.pw-jscontent input').change(CalcAll);
 
 });
