@@ -1,4 +1,5 @@
-/*global module:false*/
+const webpackConfig = require('./webpack.config');
+
 
 module.exports = function(grunt) {
 
@@ -153,6 +154,13 @@ module.exports = function(grunt) {
 	      }]
 	    }
 	  },
+    webpack: {
+      options: {
+        stats: !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+      },
+      prod: webpackConfig,
+      dev: Object.assign({ watch: false }, webpackConfig)
+    },
   });
 
   // These plugins provide necessary tasks.
@@ -163,14 +171,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-contrib-requirejs');
-	
+  
 	// Default task.
 	grunt.registerTask('css', ['sass:dev']);
 	grunt.registerTask('js', ['concat:dev','copy']);
 	grunt.registerTask('dist', [ 'sass:dist','concat:dist','copy','uglify']);
-	
 	grunt.registerTask('dev', ['sass:dev', 'concat:dev', 'connect', 'watch']);
-	grunt.registerTask('requirejs', ['requirejs']);
 
 }

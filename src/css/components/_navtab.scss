@@ -1,5 +1,6 @@
-.navtab {
-	border-collapse: collapse;
+$name : navtab;
+
+.#{$name} {
 	clear: both;
 	margin: 0 0 1em 0;
 	width: 100%;
@@ -35,17 +36,18 @@
 		}
 	}
 	
-	&-space{ 
+	&-space { 
 		border-bottom: 1px solid $border-color;
 		flex: 0 0 auto; 
-		width: 5px;
-		&-large{ 
+		width: 3px;
+		 + .#{$name}-space { 
 			flex-grow: 1;
 			width: auto;
 		}
-		&--sep{
-			width: 3px;
-		}
+    &:first-child,
+    &:last-child {
+      width: 8px;
+    }
 	}
 	
 }

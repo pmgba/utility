@@ -1,47 +1,11 @@
 const path = require('path');
 
-module.exports = [{
-  //mode: 'development',
+module.exports = {
   entry: {
-  	"pw" : [
-			'./src/scripts/pw.js'
-		],
-  	"modules/pokemon" : [
-  		'./src/scripts/modules/pokemon.js'
-  	],
-  	"edit" : [
-  		'./src/scripts/ext/edit/edit.js'
-  	],
-  	"modules/collapsiblelist" : './src/scripts/modules/collapsiblelist.js',
-  	
-  	
+    pw: './src/scripts/pw.js'
   },
-  //devtool: 'inline-source-map',
   output: {
-    path: path.resolve(__dirname, 'dist/scripts'),
-    filename: '[name].js'
-  },
-  module: {
-		rules: [{
-    	test: /\.js$/,
-			loader: 'babel-loader',
-			exclude: /(node_modules|bower_components|loadjs)/
-		}]
-  },
-  resolve: {
-    extensions: ['.ts', '.js'],
-	  modules: [
-	    path.resolve('./src'),
-	  ]
-	},
-  devServer: {
-    contentBase: './dist',
-    publicPath: '/dist/',
-    host: '127.0.0.1',
-    port: 8081,
-    watchContentBase: true,
-    compress: true
-  },
-}];
-/*
-*/
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist')
+  }
+};

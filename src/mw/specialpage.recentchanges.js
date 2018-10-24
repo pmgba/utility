@@ -75,6 +75,10 @@ $('.special li:not(.mw-logline)').each( function () {
 		log = log.replace( act, '用户' );
 		title = '创建账户';
 		$this.addClass('mw-logline-newusers');
+	} else if ( act == '用户权限日志' ) {
+		log = log.replace( act, '用户' );
+		title = html.match(/将.+‎/)[0];
+		$this.addClass('mw-logline-newusers');
 	} else if ( act == '上传日志' ) {
 		log = log.replace( act, '上传' );
 		var m = html.match(/上传(<a(.+?)a>)(的新版本)*/);
@@ -95,7 +99,7 @@ $('.special li:not(.mw-logline)').each( function () {
 		$this.addClass('mw-logline-protect');
 	} else if ( act == '封禁日志' ) {
 		log = log.replace( act, '封禁' );
-		title = html.match(/封禁了<a(.+)‎/)[0];
+		title = html.match(/(封禁了|解封了)<a(.+)‎/)[0];
 		$this.addClass('mw-logline-protect');
 		userlink = getOuterHTML($('.mw-userlink:first',$this));
 	}

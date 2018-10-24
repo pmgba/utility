@@ -3,7 +3,7 @@ window.pw = window.pokeWiki = {
   config : {
     values: {
       pwResPath : 'http://res.pokemon.name/',
-      pwScriptPath : 'http://static.pokemon.name/utility/dist/mw/',
+      pwScriptPath : 'http://static.pokemon.name/dist/mw/',
       pwLanguage : 'zh-cn',
       isMediaWiki : function(){ return typeof mw !== typeof undefined; }(),
       isMobile : function(){ return !!mw.config.get('wgMFMode'); }(),
