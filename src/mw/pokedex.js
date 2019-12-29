@@ -44,7 +44,7 @@ pokedex = {
 		var tr = '';
 		var num = pid.split('.');
 		var name = pw.util.getPokemonName( pid );
-		var data = pw.database.pokemon.data[7][pid];
+		var data = pw.database.pokemon.data[8][pid];
 		var type = pw.util.createColorlabel( 'span', 'type', pw.database.types.names["zh-cn"][data.types[0]] );
 		if ( data.types[0] != data.types[1] ) type += pw.util.createColorlabel( 'span', 'type', pw.database.types.names["zh-cn"][data.types[1]] );
 
@@ -134,7 +134,7 @@ pokedex = {
 			var html='';
 	
 			if ( display == 1 ) html += '<tr><td colspan="14">';
-			$.each( pw.database.pokemon.data[7], function( pkmnID, pkmnData ) {
+			$.each( pw.database.pokemon.data[8], function( pkmnID, pkmnData ) {
 				if ( selectedType > -1 && $.inArray( selectedType, pkmnData.types )==-1  ) return;
 				if ( selectedAbility > 0 && $.inArray( selectedAbility, pkmnData.abilities )==-1  ) return;
 				if ( selectedGeneration > -1 ) {
@@ -181,7 +181,7 @@ pokedex = {
 	},
 	
 	init : function(){
-		pw.loader.using( [ 'pokemon.js', 'pokemon.7.js', 'pokemonsprite.js', 'bootstrap'], function(){
+		pw.loader.using( [ 'pokemon.js', 'pokemon.8.js', 'pokemonsprite.js', 'bootstrap'], function(){
 			pokedex.genNames = [''];
 			for(var g=1;g<pw.info.maxPokemonCounts.length;g++){
 				pokedex.genNames[g] = '第' + '零一二三四五六七八九十'[g] + '世代';

@@ -36,6 +36,18 @@ pw.sprite = {
 	
 	create : function( ver, pid, val, width ) {
 		if ( ver === 'pi' ) {
+			var num = pid.slice(0,3);
+			var fi  = pid.slice(4);
+			if ( fil == '00' ) {
+				var opt = {};
+				opt.i = num;
+				opt.url = 'http://res.pokemon.name/common/pokemon/pi8.png';
+				opt.r = 30; opt.w = 68; opt.h = 56;
+				return pw.sprite.createHtml( opt.url, opt.w, opt.h, opt.r, opt.i, width );
+			} else {
+				return '<img src="http://res.pokemon.name/common/pokemon/icons.8/' + pid + '.png"  />';
+			}
+		} else if ( ver === 'pi' ) {
 			var opt = {};
 			var num = parseInt(pid.slice(0,3),10);
 			var fi  = parseInt(pid.slice(-2),10);

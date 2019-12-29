@@ -1,10 +1,10 @@
-pw.loader.using( [ 'pokemon.js', 'pokemon.7.js', 'pokemonsprite.js' ], function(){
+pw.loader.using( [ 'pokemon.js', 'pokemon.8.js', 'pokemonsprite.js' ], function(){
 	
 	function createPokemonTR(pid) {
 		var tr = '';
 		var num = pid.split('.');
 		var name = pw.util.getPokemonName( pid );
-		var data = pw.database.pokemon.data[7][pid];
+		var data = pw.database.pokemon.data[8][pid];
 
 		tr += '<tr>';
 		tr += '<td>' + pw.sprite.create( 'pi', pid ) + '</td>';
@@ -64,16 +64,16 @@ pw.loader.using( [ 'pokemon.js', 'pokemon.7.js', 'pokemonsprite.js' ], function(
 		if ( $this.data('list') ) {
 			var pokemonlist = $this.data('list').toString().split(',');
 			$.each( pokemonlist, function( i, pid ){
-				if ( pid in pw.database.pokemon.data[7] ) html += createPokemonTR(pid);
+				if ( pid in pw.database.pokemon.data[8] ) html += createPokemonTR(pid);
 			});
 		} else if ( $this.data('type') ) {
 			var type = parseInt($this.data('type'));
-			$.each( pw.database.pokemon.data[7], function( pid, data ){
+			$.each( pw.database.pokemon.data[8], function( pid, data ){
 				if ( $.inArray( type, data.types ) > -1 ) html += createPokemonTR(pid);
 			});
 		} else if ( $this.data('ability') ) {
 			var ability = parseInt($this.data('ability'));
-			$.each( pw.database.pokemon.data[7], function( pid, data ){
+			$.each( pw.database.pokemon.data[8], function( pid, data ){
 				if ( $.inArray( ability, data.abilities ) > -1 ) html += createPokemonTR(pid);
 			});
 		}
