@@ -96,13 +96,13 @@ pw.sprite = {
 				col : 1
 		},
 		'quest' : {
-				url : 'http://wx1.sinaimg.cn/large/9df85f1fgy1fsqavgbxp7j20e80xstb3.jpg',
+				url : 'http://www.pokemon.name/w/images/d/df/SpriteSheet_Quest_Pokemon.png',
 				width : 64,
 				height : 64,
-				col : 8
+				col : 10
 		},
 		'questmove' : {
-				url : 'http://wx1.sinaimg.cn/large/9df85f1fgy1fsybpio4qbj20dc0mon2p.jpg',
+				url : 'http://www.pokemon.name/w/images/4/49/SpriteSheet_Quest_Skills.png',
 				width : 48,
 				height : 48,
 				col : 10
